@@ -12,10 +12,6 @@ import java.util.Scanner;
 
 public class JottTokenizer {
 
-	public static void main(String[] args){
-		tokenize("C:\\Users\\Daniel\\IdeaProjects\\jottTranslator\\src\\tokenizerTestCases\\phase1Example.jott");
-	}
-
 	/**
      * Takes in a filename and tokenizes that file into Tokens
      * based on the rules of the Jott Language
@@ -88,13 +84,17 @@ public class JottTokenizer {
 						if(i+1 < array.length && isNumeric(array[i+1])){
 							StringBuilder number = new StringBuilder();
 							number.append(array[i]);
-							i++;
-							while(i < array.length && isNumeric(array[i])){
-								number.append(array[i]);
+							while(i < array.length && isNumeric(array[i+1])){
+								number.append(array[i+1]);
 								i++;
 							}
 							result.add(new Token(number.toString(), filename, lnr.getLineNumber(), TokenType.NUMBER));
-							i--;
+						}
+						else if(!isNumeric(array[i+1])){
+							System.out.println("Syntax Error\n" +
+									"Invalid token \"" + array[i] +"\"\n" +
+									filename + ":" + lnr.getLineNumber());
+							System.exit(0);
 						}
 					}
 					else if(isNumeric(array[i])){
@@ -127,6 +127,12 @@ public class JottTokenizer {
 							i++;
 							result.add(new Token("!=", filename, lnr.getLineNumber(), TokenType.REL_OP));
 						}
+						else{
+							System.out.println("Syntax Error\n" +
+									"Invalid token \"" + array[i] +"\"\n" +
+									filename + ":" + lnr.getLineNumber());
+							System.exit(0);
+						}
 					}
 					else if(array[i].equals("\"")){
 						StringBuilder string = new StringBuilder();
@@ -135,11 +141,18 @@ public class JottTokenizer {
 							while(array[i+1].equals(" ") || isNumeric(array[i+1]) || isAlpha(array[i+1])){
 								string.append(array[i+1]);
 								i++;
+								if(i+1 >= array.length){
+									System.out.println("Syntax Error\n" +
+											"Invalid token \"" + array[i] +"\"\n" +
+											filename + ":" + lnr.getLineNumber());
+									System.exit(0);
+								}
+								if(array[i+1].equals("\"")){
+									string.append(array[i+1]);
+									result.add(new Token(string.toString(), filename, lnr.getLineNumber(), TokenType.STRING));
+									break;
+								}
 							}
-						}
-						if(array[i+1].equals("\"")){
-							string.append(array[i+1]);
-							result.add(new Token(string.toString(), filename, lnr.getLineNumber(), TokenType.STRING));
 						}
 					}
 				}
@@ -152,10 +165,7 @@ public class JottTokenizer {
 			e.printStackTrace();
 		}
 
-		for (Token token : result) {
-			System.out.println(token.getToken());
-		}
-		return null;
+		return result;
 	}
 
 	public static boolean isNumeric(String str){
