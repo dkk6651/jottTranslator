@@ -20,4 +20,8 @@ public class JottParser {
     public static JottTree parse(ArrayList<Token> tokens){
 		return null;
     }
+
+    public String convertToJott (){
+        return null;
+    }
 }

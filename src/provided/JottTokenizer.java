@@ -94,7 +94,7 @@ public class JottTokenizer {
 							System.out.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
 									filename + ":" + lnr.getLineNumber());
-							System.exit(0);
+							return null;
 						}
 					}
 					else if(isNumeric(array[i])){
@@ -131,7 +131,7 @@ public class JottTokenizer {
 							System.out.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
 									filename + ":" + lnr.getLineNumber());
-							System.exit(0);
+							return null;
 						}
 					}
 					else if(array[i].equals("\"")){
@@ -145,7 +145,7 @@ public class JottTokenizer {
 									System.out.println("Syntax Error\n" +
 											"Invalid token \"" + array[i] +"\"\n" +
 											filename + ":" + lnr.getLineNumber());
-									System.exit(0);
+									return null;
 								}
 								if(array[i+1].equals("\"")){
 									string.append(array[i+1]);
