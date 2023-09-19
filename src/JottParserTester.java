@@ -1,16 +1,9 @@
-package testers;
-
 /*
   Jott parser tester. This will test the parsing phase of the Jott
   project.
 
   This tester assumes a working and valid tokenizer.
  */
-
-import provided.JottParser;
-import provided.JottTokenizer;
-import provided.JottTree;
-import provided.Token;
 
 import java.io.FileWriter;
 import java.io.IOException;

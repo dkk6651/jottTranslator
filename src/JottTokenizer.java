@@ -1,5 +1,3 @@
-package provided;
-
 /**
  * This class is responsible for tokenizing Jott code.
  * 
@@ -8,7 +6,7 @@ package provided;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class JottTokenizer {
 
@@ -24,7 +22,7 @@ public class JottTokenizer {
     	try{
     		FileReader fr = new FileReader(filename);
 			BufferedReader reader = new BufferedReader(fr);
-			LineNumberReader lnr = new LineNumberReader(fr);
+			int lineNumber = 1;
 			String line;
 
 			while((line = reader.readLine()) != null){
@@ -44,93 +42,109 @@ public class JottTokenizer {
 						}
 					}
 					else if(array[i].equals(",")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.COMMA));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.COMMA));
 					}
 					else if(array[i].equals("]")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.R_BRACKET));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.R_BRACKET));
 					}
 					else if(array[i].equals("[")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.L_BRACKET));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.L_BRACKET));
 					}
 					else if(array[i].equals("}")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.R_BRACE));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.R_BRACE));
 					}
 					else if(array[i].equals("{")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.L_BRACE));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.L_BRACE));
 					}
 					else if(array[i].equals("=")){
-						if(array[i + 1].equals("=")){
-							result.add(new Token(array[i] + array[i+1], filename, lnr.getLineNumber(), TokenType.REL_OP));
+						if(i+1 < array.length && array[i+1].equals("=")){
+							result.add(new Token(array[i] + array[i+1], filename, lineNumber, TokenType.REL_OP));
 							i++;
 							continue;
 						}
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.ASSIGN));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.ASSIGN));
 					}
 					else if(array[i].equals("<") || array[i].equals(">")){
-						if(array[i + 1].equals("=")){
-							result.add(new Token(array[i] + array[i+1], filename, lnr.getLineNumber(), TokenType.REL_OP));
+						if(i+1 < array.length && array[i+1].equals("=")){
+							result.add(new Token(array[i] + array[i+1], filename, lineNumber, TokenType.REL_OP));
 							i++;
 							continue;
 						}
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.REL_OP));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.REL_OP));
 					}
 					else if(array[i].equals("/") || array[i].equals("+") || array[i].equals("-") || array[i].equals("*")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.MATH_OP));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.MATH_OP));
 					}
 					else if(array[i].equals(";")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.SEMICOLON));
+						result.add(new Token(array[i], filename, lineNumber, TokenType.SEMICOLON));
 					}
 					else if(array[i].equals(".")){
 						if(i+1 < array.length && isNumeric(array[i+1])){
 							StringBuilder number = new StringBuilder();
 							number.append(array[i]);
-							while(i < array.length && isNumeric(array[i+1])){
+							while(i+1 < array.length && isNumeric(array[i+1])){
 								number.append(array[i+1]);
 								i++;
 							}
-							result.add(new Token(number.toString(), filename, lnr.getLineNumber(), TokenType.NUMBER));
+							result.add(new Token(number.toString(), filename, lineNumber, TokenType.NUMBER));
 						}
-						else if(!isNumeric(array[i+1])){
-							System.out.println("Syntax Error\n" +
+						else if(i+1 <= array.length || !isNumeric(array[i+1])){
+							System.err.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
-									filename + ":" + lnr.getLineNumber());
+									filename + ":" + lineNumber);
+							return null;
+						}
+						else{
 							return null;
 						}
 					}
 					else if(isNumeric(array[i])){
 						StringBuilder number = new StringBuilder();
 						number.append(array[i]);
-						if(i+1 < array.length && isNumeric(array[i+1])){
-							while(i+1 < array.length && isNumeric(array[i+1])){
+						if(i+1 < array.length){
+							while(i+1 < array.length && (isNumeric(array[i+1])) && !array[i+1].equals(".")){
 								number.append(array[i+1]);
 								i++;
 							}
+							if(array[i+1].equals(".")){
+								number.append(array[i+1]);
+								i++;
+								while(i+1 < array.length && (isNumeric(array[i+1]))){
+									number.append(array[i+1]);
+									i++;
+								}
+							}
 						}
-						result.add(new Token(number.toString(), filename, lnr.getLineNumber(), TokenType.NUMBER));
+						result.add(new Token(number.toString(), filename, lineNumber, TokenType.NUMBER));
 					}
 					else if(isAlpha(array[i])){
 						StringBuilder id = new StringBuilder();
 						id.append(array[i]);
 						if(i+1 < array.length && isAlpha(array[i+1])){
-							while(i+1 < array.length && isAlpha(array[i+1])){
+							while(i+1 < array.length && (isAlpha(array[i+1]) || isNumeric(array[i+1]))){
 								id.append(array[i+1]);
 								i++;
 							}
 						}
-						result.add(new Token(id.toString(), filename, lnr.getLineNumber(), TokenType.ID_KEYWORD));
+						result.add(new Token(id.toString(), filename, lineNumber, TokenType.ID_KEYWORD));
 					}
 					else if(array[i].equals(":")){
-						result.add(new Token(array[i], filename, lnr.getLineNumber(), TokenType.COLON));
+						if(i+1 < array.length && array[i+1].equals(":")){
+							result.add(new Token("::", filename, lineNumber, TokenType.FC_HEADER));
+							i++;
+							continue;
+						}
+						result.add(new Token(array[i], filename, lineNumber, TokenType.COLON));
 					}
 					else if(array[i].equals("!")){
 						if(i+1 < array.length && array[i+1].equals("=")){
 							i++;
-							result.add(new Token("!=", filename, lnr.getLineNumber(), TokenType.REL_OP));
+							result.add(new Token("!=", filename, lineNumber, TokenType.REL_OP));
 						}
 						else{
-							System.out.println("Syntax Error\n" +
+							System.err.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
-									filename + ":" + lnr.getLineNumber());
+									filename + ":" + lineNumber);
 							return null;
 						}
 					}
@@ -138,24 +152,32 @@ public class JottTokenizer {
 						StringBuilder string = new StringBuilder();
 						string.append(array[i]);
 						if(i+1 < array.length){
-							while(array[i+1].equals(" ") || isNumeric(array[i+1]) || isAlpha(array[i+1])){
+							while(!array[i+1].equals("\"")){
 								string.append(array[i+1]);
 								i++;
 								if(i+1 >= array.length){
-									System.out.println("Syntax Error\n" +
+									System.err.println("Syntax Error\n" +
 											"Invalid token \"" + array[i] +"\"\n" +
-											filename + ":" + lnr.getLineNumber());
+											filename + ":" + lineNumber);
 									return null;
 								}
 								if(array[i+1].equals("\"")){
 									string.append(array[i+1]);
-									result.add(new Token(string.toString(), filename, lnr.getLineNumber(), TokenType.STRING));
+									result.add(new Token(string.toString(), filename, lineNumber, TokenType.STRING));
+									i++;
 									break;
 								}
 							}
 						}
+						else{
+							System.err.println("Syntax Error\n" +
+									"Invalid token \"" + array[i] +"\"\n" +
+									filename + ":" + lineNumber);
+							return null;
+						}
 					}
 				}
+				lineNumber++;
 			}
 		}
     	catch(FileNotFoundException e){

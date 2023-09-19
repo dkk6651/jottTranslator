@@ -1,5 +1,3 @@
-package provided;
-
 /**
  * This class is responsible for paring Jott Tokens
  * into a Jott parse tree.
@@ -11,6 +9,8 @@ import java.util.ArrayList;
 
 public class JottParser {
 
+
+
     /**
      * Parses an ArrayList of Jotton tokens into a Jott Parse Tree.
      * @param tokens the ArrayList of Jott tokens to parse
@@ -21,7 +21,4 @@ public class JottParser {
 		return null;
     }
 
-    public String convertToJott (){
-        return null;
-    }
 }

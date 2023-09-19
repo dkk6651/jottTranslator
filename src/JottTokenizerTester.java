@@ -1,5 +1,3 @@
-package testers;
-
 /*
  * Tester for phase 1 of the Jott Translator
  *
@@ -10,10 +8,6 @@ package testers;
  *
  * @author Scott C Johnson (scj@cs.rit.edu)
  */
-
-import provided.JottTokenizer;
-import provided.Token;
-import provided.TokenType;
 
 import java.util.ArrayList;
 
@@ -122,11 +116,13 @@ public class JottTokenizerTester {
         phase1ExampleTokens.add(new Token(":", filename, 2, TokenType.COLON));
         phase1ExampleTokens.add(new Token("Void", filename, 2, TokenType.ID_KEYWORD));
         phase1ExampleTokens.add(new Token("{", filename, 2, TokenType.L_BRACE));
+		phase1ExampleTokens.add(new Token("::", filename, 3, TokenType.FC_HEADER));
         phase1ExampleTokens.add(new Token("print", filename, 3, TokenType.ID_KEYWORD));
         phase1ExampleTokens.add(new Token("[", filename, 3, TokenType.L_BRACKET));
         phase1ExampleTokens.add(new Token("5", filename, 3, TokenType.NUMBER));
         phase1ExampleTokens.add(new Token("]", filename, 3, TokenType.R_BRACKET));
         phase1ExampleTokens.add(new Token(";", filename, 3, TokenType.SEMICOLON));
+		phase1ExampleTokens.add(new Token("::", filename, 5, TokenType.FC_HEADER));
         phase1ExampleTokens.add(new Token("print", filename, 5, TokenType.ID_KEYWORD));
         phase1ExampleTokens.add(new Token("[", filename, 5, TokenType.L_BRACKET));
         phase1ExampleTokens.add(new Token("\"foo bar\"", filename, 5, TokenType.STRING));
