@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class JottParser {
 
-
-
     /**
      * Parses an ArrayList of Jotton tokens into a Jott Parse Tree.
      * @param tokens the ArrayList of Jott tokens to parse
