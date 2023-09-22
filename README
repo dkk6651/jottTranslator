@@ -1,0 +1,4 @@
+Given that there is no "main" function, users would simply need to build the
+project and utilize the "tokenizer(filename)" function. Alternatively, users
+could include a main function within the "JottTokenizer.java" file and
+call the "tokenizer" function from there.

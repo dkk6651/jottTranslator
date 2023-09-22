@@ -1,7 +1,11 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author 
+ * @author Daniel Kim
+ * @author Jonas Long
+ * @author JD Rears
+ * @author Ishan Shah
+ * @author Cole Allen
  **/
 
 import java.io.*;
