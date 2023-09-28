@@ -1,4 +1,4 @@
-public class else_stmt implements JottTree {
+public class varDecNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

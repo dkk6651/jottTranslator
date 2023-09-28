@@ -1,4 +1,4 @@
-#this will fail phase 3 for missing params in function call.
+#this will fail phase 3 for missing paramsNode in function call.
 
 def foo[x:Integer]:Integer{
     return x + 1;

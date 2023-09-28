@@ -1,4 +1,4 @@
-public class expr implements JottTree {
+public class programNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

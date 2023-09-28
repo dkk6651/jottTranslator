@@ -1,4 +1,4 @@
-public class func_call implements JottTree {
+public class elseifStmtNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

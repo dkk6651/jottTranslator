@@ -1,4 +1,4 @@
-public class asmt implements JottTree {
+public class paramsTNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

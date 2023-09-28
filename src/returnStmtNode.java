@@ -1,4 +1,4 @@
-public class op implements JottTree {
+public class returnStmtNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

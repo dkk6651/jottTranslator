@@ -1,4 +1,4 @@
-public class type implements JottTree {
+public class funcDefParamsTNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

@@ -1,4 +1,4 @@
-public class params implements JottTree {
+public class funcDefParamsNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

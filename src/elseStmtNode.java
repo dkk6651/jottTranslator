@@ -1,4 +1,4 @@
-public class bool implements JottTree {
+public class elseStmtNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

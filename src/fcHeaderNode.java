@@ -1,4 +1,18 @@
-public class func_def_params_t implements JottTree {
+import java.util.ArrayList;
+
+public class fcHeaderNode implements JottTree {
+    public String value;
+
+    public fcHeaderNode(Token token){
+        this.value = token.getToken();
+    }
+
+    public static JottTree parse(ArrayList<Token> tokens){
+        Token token = tokens.remove(0);
+        fcHeaderNode node = new fcHeaderNode(token);
+        return node;
+    }
+
     @Override
     public String convertToJott() {
         return null;

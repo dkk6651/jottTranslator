@@ -1,6 +1,6 @@
 #this should fail phase 2
 #param order swapped
-#Error: Expected <id> got <type>
+#Error: Expected <id> got <typeNode>
 
 def main[Integer:x]:Double{
     return 5;

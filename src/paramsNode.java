@@ -1,4 +1,11 @@
-public class params_t implements JottTree {
+import java.util.ArrayList;
+
+public class paramsNode implements JottTree {
+
+    public paramsNode(ArrayList<Token> tokens){
+
+    }
+
     @Override
     public String convertToJott() {
         return null;

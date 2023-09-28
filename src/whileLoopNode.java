@@ -1,4 +1,4 @@
-public class function_return implements JottTree {
+public class whileLoopNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

@@ -1,4 +1,4 @@
-public class elseif_stmt implements JottTree {
+public class asmtNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

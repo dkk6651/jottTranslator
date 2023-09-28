@@ -1,4 +1,4 @@
-public class var_dec implements JottTree {
+public class exprNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;

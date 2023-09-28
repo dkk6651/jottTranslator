@@ -1,4 +1,4 @@
-public class program implements JottTree {
+public class ifStmtNode implements JottTree {
     @Override
     public String convertToJott() {
         return null;
