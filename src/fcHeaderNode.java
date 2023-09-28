@@ -9,8 +9,7 @@ public class fcHeaderNode implements JottTree {
 
     public static JottTree parse(ArrayList<Token> tokens){
         Token token = tokens.remove(0);
-        fcHeaderNode node = new fcHeaderNode(token);
-        return node;
+        return new fcHeaderNode(token);
     }
 
     @Override

@@ -2,20 +2,39 @@ import java.util.ArrayList;
 
 public class funcCallNode implements JottTree {
     private JottTree fcHeader;
-    private Token id;
+    private JottTree id;
     private JottTree params;
-    String value;
 
-    public funcCallNode(Token token) {
-        this.value = token.getToken();
+    public funcCallNode() {
     }
 
     public static JottTree parse(ArrayList<Token> tokens){
-        Token token = tokens.remove(0);
-        funcCallNode node = new funcCallNode(token);
-        node.fcHeader = fcHeaderNode.parse(tokens);
-
-        return node;
+        Token token = tokens.get(0);
+        funcCallNode node = new funcCallNode();
+        if(token.getTokenType() == TokenType.FC_HEADER){
+            node.fcHeader = fcHeaderNode.parse(tokens);
+            node.id = idNode.parse(tokens);
+            if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
+                tokens.remove(0);
+                node.params = paramsNode.parse(tokens);
+                if(tokens.get(0).getTokenType() == TokenType.R_BRACKET){
+                    tokens.remove(0);
+                    return node;
+                }
+                else{
+                    System.err.println();
+                    return null;
+                }
+            }
+            else{
+                System.err.println();
+                return null;
+            }
+        }
+        else{
+            System.err.println();
+            return null;
+        }
     }
 
     @Override

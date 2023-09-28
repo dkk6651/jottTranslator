@@ -2,8 +2,12 @@ import java.util.ArrayList;
 
 public class paramsNode implements JottTree {
 
-    public paramsNode(ArrayList<Token> tokens){
+    public paramsNode(){
 
+    }
+
+    public static JottTree parse(ArrayList<Token> tokens){
+        return null;
     }
 
     @Override

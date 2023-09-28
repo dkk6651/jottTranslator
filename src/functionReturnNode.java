@@ -2,28 +2,26 @@ import java.util.ArrayList;
 
 public class functionReturnNode implements JottTree {
     private String value;
-    private int lineNumber;
-    private String filename;
-    private TokenType type;
-    private JottTree typeReturn = null;
+    private JottTree typeReturn;
 
-    public functionReturnNode(ArrayList<Token> tokens){
-        parse(tokens);
+    public functionReturnNode(Token token){
+        this.value = token.getToken();
     }
+
+    public functionReturnNode(){}
 
     public static JottTree parse(ArrayList<Token> tokens) {
         Token token = tokens.get(0);
-        functionReturnNode node = null;
         if (token.getToken().equals("Void")) {
             token = tokens.remove(0);
-            node = new functionReturnNode(token);
+            return new functionReturnNode(token);
+        }
+        else{
+            JottTree type = typeNode.parse(tokens);
+            functionReturnNode node = new functionReturnNode();
+            node.typeReturn = type;
             return node;
         }
-        else if(token.getToken().equals("Double") || token.getToken().equals("Integer") || token.getToken().equals("String") || token.getToken().equals("Boolean")){
-            node.typeReturn = typeNode.Parse(tokens);
-        }
-
-        return null;
     }
 
     @Override

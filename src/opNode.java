@@ -1,30 +1,21 @@
 import java.util.ArrayList;
 
 public class opNode implements JottTree {
-    private String value;
-    private int lineNumber;
-    private String filename;
-    private TokenType type;
+    String value;
 
     public opNode(Token token){
         this.value = token.getToken();
-        this.lineNumber = token.getLineNum();
-        this.filename = token.getFilename();
-        this.type = token.getTokenType();
     }
 
-    @Override
-    public JottTree Parse(ArrayList<Token> tokens){
+    public static JottTree parse(ArrayList<Token> tokens){
         Token token = tokens.remove(0);
         opNode node = null;
-        if(token.getToken().equals("+") ||
-                token.getToken().equals("*") || token.getToken().equals("/") || token.getToken().equals("-") ||
-                token.getToken().equals(">") || token.getToken().equals(">=") || token.getToken().equals("<") ||
-                token.getToken().equals("<=") || token.getToken().equals("==") || token.getToken().equals("!=")){
+        if(token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP){
             node = new opNode(token);
         }
         else{
             System.err.println(); //@Todo Implement syntax error message
+            return null;
         }
         return node;
     }

@@ -1,23 +1,15 @@
 import java.util.ArrayList;
 
-public class boolNode implements JottTree {
-    public String value;
+public class idNode implements JottTree{
+    String value;
 
-    public boolNode(Token token){
+    public idNode(Token token){
         this.value = token.getToken();
     }
 
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static JottTree parse(ArrayList<Token> tokens){
         Token token = tokens.remove(0);
-        boolNode node = null;
-        if(token.getToken().equals("True") || token.getToken().equals("False")){
-            node = new boolNode(token);
-        }
-        else{
-            System.err.println(); //@Todo Implement syntax error message
-            return null;
-        }
-        return node;
+        return new idNode(token);
     }
 
     @Override
