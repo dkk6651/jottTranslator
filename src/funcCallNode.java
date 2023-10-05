@@ -13,6 +13,10 @@ public class funcCallNode implements JottTree {
         funcCallNode node = new funcCallNode();
         if(token.getTokenType() == TokenType.FC_HEADER){
             node.fcHeader = fcHeaderNode.parse(tokens);
+            if(tokens.get(0).getTokenType() != TokenType.ID_KEYWORD){
+                System.err.println();
+                return null;
+            }
             node.id = idNode.parse(tokens);
             if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
                 tokens.remove(0);

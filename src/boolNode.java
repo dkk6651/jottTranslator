@@ -1,23 +1,14 @@
 import java.util.ArrayList;
 
-public class boolNode implements JottTree {
-    public String value;
+public class boolNode extends exprNode {
+    Token token;
 
     public boolNode(Token token){
-        this.value = token.getToken();
+        this.token = token;
     }
 
-    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
-        Token token = tokens.remove(0);
-        boolNode node = null;
-        if(token.getToken().equals("True") || token.getToken().equals("False")){
-            node = new boolNode(token);
-            return node;
-        }
-        else{
-            throw new Exception("Syntax Error\n Token can not be parsed into a Boolean\n"
-                        + token.getFilename() + ":" + token.getLineNum());
-        }
+    public static JottTree parse(ArrayList<Token> tokens) {
+        return new boolNode(tokens.remove(0));
     }
 
     @Override

@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
 public class opNode implements JottTree {
-    String value;
+    Token token;
 
     public opNode(Token token){
-        this.value = token.getToken();
+        this.token = token;
     }
 
     public static JottTree parse(ArrayList<Token> tokens){
-        Token token = tokens.remove(0);
-        opNode node = null;
+        Token token = tokens.get(0);
+        opNode node;
         if(token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP){
-            node = new opNode(token);
+            node = new opNode(tokens.remove(0));
         }
         else{
             System.err.println(); //@Todo Implement syntax error message
@@ -22,7 +22,7 @@ public class opNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override

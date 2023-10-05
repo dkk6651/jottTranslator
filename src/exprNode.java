@@ -1,40 +1,25 @@
 import java.util.ArrayList;
 
-public class exprNode implements JottTree {
-    JottTree id;
-    JottTree bool;
-    JottTree funcCall;
-    JottTree op;
-    JottTree expr;
-    String value;
-
-    public exprNode(Token token){
-        this.value = token.getToken();
-    }
-
-    public exprNode(){}
-
-    public static JottTree parse(ArrayList<Token> tokens){
+public abstract class exprNode implements JottTree {
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.get(0);
-        exprNode node = new exprNode();
+        JottTree node;
         if(token.getTokenType() == TokenType.NUMBER){
-            token = tokens.remove(0);
-            node.value = token.getToken();
+            node = numNode.parse(tokens);
         }
         else if(token.getToken().equals("True") || token.getToken().equals("False")){
-            node.bool = boolNode.parse(tokens);
+            node = boolNode.parse(tokens);
             return node;
         }
         else if(token.getTokenType() == TokenType.ID_KEYWORD){
-            node.id = idNode.parse(tokens);
+            node = idNode.parse(tokens);
         }
         else if(token.getTokenType() == TokenType.STRING){
-            token = tokens.remove(0);
-            node.value = token.getToken();
+            node = stringNode.parse(tokens);
             return node;
         }
         else if(token.getTokenType() == TokenType.FC_HEADER){
-            node.funcCall = funcCallNode.parse(tokens);
+            node = funcCallNode.parse(tokens);
         }
         else{
             System.err.println(); //@Todo implement syntax error message
@@ -42,16 +27,10 @@ public class exprNode implements JottTree {
         }
 
         if(tokens.get(0).getTokenType() == TokenType.MATH_OP || tokens.get(0).getTokenType() == TokenType.REL_OP){
-            node.op = opNode.parse(tokens);
-            node.expr = exprNode.parse(tokens);
-            return node;
-        }
-        else if(tokens.get(0).getTokenType() == TokenType.SEMICOLON || tokens.get(0).getTokenType() == TokenType.R_BRACKET || tokens.get(0).getToken().equals(",")){
-            return node;
+            return new binaryExprNode(node, opNode.parse(tokens), exprNode.parse(tokens));
         }
         else{
-            System.err.println(); //@Todo implement syntax error message
-            return null;
+            return node;
         }
     }
 

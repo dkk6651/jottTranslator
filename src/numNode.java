@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
-public class fcHeaderNode implements JottTree {
+public class numNode extends exprNode {
     Token token;
 
-    public fcHeaderNode(Token token){
+    public numNode(Token token){
         this.token = token;
     }
 
     public static JottTree parse(ArrayList<Token> tokens){
-        return new fcHeaderNode(tokens.remove(0));
+        return new numNode(tokens.remove(0));
     }
 
     @Override
     public String convertToJott() {
-        return this.token.getToken();
+        return null;
     }
 
     @Override

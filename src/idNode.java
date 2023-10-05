@@ -1,20 +1,19 @@
 import java.util.ArrayList;
 
-public class idNode implements JottTree{
-    String value;
+public class idNode extends exprNode{
+    Token token;
 
     public idNode(Token token){
-        this.value = token.getToken();
+        this.token = token;
     }
 
-    public static JottTree parse(ArrayList<Token> tokens){
-        Token token = tokens.remove(0);
-        return new idNode(token);
+    public static exprNode parse(ArrayList<Token> tokens){
+        return new idNode(tokens.remove(0));
     }
 
     @Override
     public String convertToJott() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override
