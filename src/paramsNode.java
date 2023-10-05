@@ -1,13 +1,42 @@
 import java.util.ArrayList;
 
 public class paramsNode implements JottTree {
+    public JottTree expressionNode;
+    ArrayList<JottTree> expressions;
 
-    public paramsNode(){
 
-    }
+    public paramsNode(){ }
 
-    public static JottTree parse(ArrayList<Token> tokens){
-        return null;
+    public static JottTree parse(ArrayList<Token> tokens) {
+        paramsNode node = new paramsNode();
+        ArrayList<JottTree> expressions = new ArrayList<>();
+        node.expressions = expressions; //shallow copy the list to node ahead of time
+
+        Token curToken = tokens.get(0);
+        if(curToken.getTokenType() == TokenType.R_BRACKET){
+            return node;
+        } else {
+            node.expressionNode = exprNode.parse(tokens);
+
+            boolean foundEnd = true;
+            while (foundEnd) { //only leave loop on error, returns when end bracket is found
+                foundEnd = false;
+                for (Token i : tokens) {
+                    if (i.getTokenType() == TokenType.R_BRACKET) {
+                        return node;
+                    } else if (i.getTokenType() == TokenType.COMMA) {
+                        expressions.add(paramsTNode.parse(tokens));
+                        foundEnd = true;
+                    }
+                }
+            }
+            System.err.println(); //@Todo implement syntax error message
+            return null;
+        }
+
+
+
+
     }
 
     @Override
