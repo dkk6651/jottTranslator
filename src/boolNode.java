@@ -7,17 +7,17 @@ public class boolNode implements JottTree {
         this.value = token.getToken();
     }
 
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.remove(0);
         boolNode node = null;
         if(token.getToken().equals("True") || token.getToken().equals("False")){
             node = new boolNode(token);
+            return node;
         }
         else{
-            System.err.println(); //@Todo Implement syntax error message
-            return null;
+            throw new Exception("Syntax Error\n Token can not be parsed into a Boolean\n"
+                        + token.getFilename() + ":" + token.getLineNum());
         }
-        return node;
     }
 
     @Override
