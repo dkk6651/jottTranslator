@@ -30,17 +30,20 @@ public class paramsNode implements JottTree {
                     }
                 }
             }
-            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsNode\n{0}:{1}", curToken.getFilename(), curToken.getLineNum()));
+            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsNode\n%s:%d", curToken.getFilename(), curToken.getLineNum()));
         }
-
-
-
-
     }
 
     @Override
     public String convertToJott() {
-        return null;
+        if(expressionNode==null){
+            return "";
+        } else {
+            ArrayList<String> paramStrs = new ArrayList<>();
+            expressions.forEach(itm -> {paramStrs.add(itm.convertToJott());});
+
+            return String.format("%s, %s",expressionNode.convertToJott(), String.join(" ", paramStrs));
+        }
     }
 
     @Override

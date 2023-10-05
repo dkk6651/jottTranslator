@@ -4,7 +4,7 @@ public class paramsTNode implements JottTree {
     public JottTree expression;
     @Override
     public String convertToJott() {
-        return null;
+        return String.format(", %s", expression.convertToJott());
     }
 
     public paramsTNode(){ }
@@ -17,7 +17,7 @@ public class paramsTNode implements JottTree {
             tNode.expression = exprNode.parse(tokens);
             return tNode;
         } else {
-            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsTNode\n{0}:{1}", token.getFilename(), token.getLineNum()));
+            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsTNode\n%s:%d", token.getFilename(), token.getLineNum()));
         }
     }
 
