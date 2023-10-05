@@ -7,7 +7,7 @@ public class paramsNode implements JottTree {
 
     public paramsNode(){ }
 
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         paramsNode node = new paramsNode();
         ArrayList<JottTree> expressions = new ArrayList<>();
         node.expressions = expressions; //shallow copy the list to node ahead of time
@@ -30,8 +30,7 @@ public class paramsNode implements JottTree {
                     }
                 }
             }
-            System.err.println(); //@Todo implement syntax error message
-            return null;
+            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsNode\n{0}:{1}", curToken.getFilename(), curToken.getLineNum()));
         }
 
 

@@ -9,7 +9,7 @@ public class paramsTNode implements JottTree {
 
     public paramsTNode(){ }
 
-    public static JottTree parse(ArrayList<Token> tokens){
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.get(0);
         paramsTNode tNode = new paramsTNode();
         if(token.getTokenType()==TokenType.COMMA){
@@ -17,8 +17,7 @@ public class paramsTNode implements JottTree {
             tNode.expression = exprNode.parse(tokens);
             return tNode;
         } else {
-            System.err.println(); //@Todo implement syntax error message
-            return null;
+            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a ParamsTNode\n{0}:{1}", token.getFilename(), token.getLineNum()));
         }
     }
 
