@@ -36,7 +36,7 @@ public class elseStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        return "else{" + bodyNode.convertToJott() + "}";
     }
 
     @Override
