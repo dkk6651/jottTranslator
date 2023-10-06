@@ -58,7 +58,7 @@ public class elseifStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        return "elseif[" + condition.convertToJott() + "]{" + bodyNode.convertToJott() + "}";
     }
 
     @Override
