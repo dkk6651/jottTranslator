@@ -5,8 +5,8 @@ public class ifStmtNode implements JottTree {
     public String value;
     public JottTree bodyNode;
     public JottTree condition;
-    public static ArrayList<JottTree> elseifLst;
-    public static JottTree hasElse;
+    public ArrayList<JottTree> elseifLst;
+    public JottTree hasElse;
 
     public ifStmtNode(Token token){
         this.value = token.getToken();
@@ -57,9 +57,9 @@ public class ifStmtNode implements JottTree {
                                 if(eachelseif == null){
                                     break;
                                 }
-                                elseifLst.add(eachelseif);
+                                node.elseifLst.add(eachelseif);
                             }
-                            hasElse = elseStmtNode.parse(tokens);
+                            node.hasElse = elseStmtNode.parse(tokens);
                         }
                     }
                 }
@@ -71,7 +71,16 @@ public class ifStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        String ifString = "if[" + condition.convertToJott() + "]{" + bodyNode.convertToJott() + "}";
+        if(!elseifLst.isEmpty()){
+            for (JottTree jottTree : elseifLst) {
+                ifString.concat(jottTree.convertToJott());
+            }
+        }
+        if(hasElse!=null){
+            ifString.concat(hasElse.convertToJava(ifString));
+        }
+        return ifString;
     }
 
     @Override
