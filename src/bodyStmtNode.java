@@ -1,5 +1,11 @@
+import java.util.ArrayList;
 
 public class bodyStmtNode implements JottTree {
+
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception{
+        return null;
+    }
+
     @Override
     public String convertToJott() {
         return null;
