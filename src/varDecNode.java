@@ -1,7 +1,38 @@
+import java.util.ArrayList;
+
 public class varDecNode implements JottTree {
+    private JottTree type;
+    private exprNode id;
+
+    public varDecNode(JottTree type, exprNode id) {
+        this.type = type;
+        this.id = id;
+    }
+
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
+        // parse for type
+        JottTree v_type = typeNode.parse(tokens);
+
+        // parse for id
+        exprNode v_id = idNode.parse(tokens);
+
+        // check for semicolon
+        if (tokens.get(0).getTokenType() != TokenType.SEMICOLON) {
+            throw new Exception(null, null);
+        }
+
+        tokens.remove(0);
+
+        return new varDecNode(v_type, v_id);
+    }
+
     @Override
     public String convertToJott() {
-        return null;
+        String output = type.convertToJott();
+        output += id.convertToJott();
+        output += ";";
+
+        return output;
     }
 
     @Override
