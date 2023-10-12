@@ -22,7 +22,7 @@ public class programNode implements JottTree {
     public String convertToJott() {
         StringBuilder jottOutput = new StringBuilder();
         for (JottTree funcDef : functionDefNodes) {
-            jottOutput.append(funcDef);
+            jottOutput.append(funcDef.convertToJott());
             jottOutput.append(" ");
         }
         return jottOutput.toString();
