@@ -1,3 +1,6 @@
+/*
+ * @author: Ishan Shah is4761
+ */
 import java.util.ArrayList;
 
 public class elseifStmtNode implements JottTree {
@@ -13,7 +16,7 @@ public class elseifStmtNode implements JottTree {
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.get(0);
         elseifStmtNode node = null;
-        // check for elsif
+        // check for elseif
         if(token.getToken().equals("elseif")){
             tokens.remove(0);
             node = new elseifStmtNode(token);
