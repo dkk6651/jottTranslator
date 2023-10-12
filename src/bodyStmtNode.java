@@ -1,33 +1,32 @@
 import java.util.ArrayList;
 
-public class bodyStmtNode implements JottTree {
-
+public interface bodyStmtNode {
     public static JottTree parse(ArrayList<Token> tokens) throws Exception{
-        return null;
-    }
+        Token token = tokens.get(0);
 
-    @Override
-    public String convertToJott() {
-        return null;
-    }
+        // check if if-statement
+        if (token.getToken().equals("if")) {
+            return ifStmtNode.parse(tokens);
+        }
 
-    @Override
-    public String convertToJava(String className) {
-        return null;
-    }
+        // check if while loop
+        else if (token.getToken().equals("while")) {
+            return whileLoopNode.parse(tokens);
+        }
 
-    @Override
-    public String convertToC() {
-        return null;
-    }
+        // check if function call
+        else if (token.getTokenType() == TokenType.FC_HEADER) {
+            return funcCallNode.parse(tokens);
+        }
+        else {
 
-    @Override
-    public String convertToPython() {
-        return null;
-    }
-
-    @Override
-    public boolean validateTree() {
-        return false;
+            // Look 2 tokens ahead
+            if (tokens.get(2).getTokenType() == TokenType.SEMICOLON) {
+                return varDecNode.parse(tokens);
+            }
+            else {
+                return asmtNode.parse(tokens);
+            }
+        }
     }
 }

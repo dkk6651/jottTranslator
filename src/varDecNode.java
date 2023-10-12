@@ -20,7 +20,6 @@ public class varDecNode implements JottTree {
         if (tokens.get(0).getTokenType() != TokenType.SEMICOLON) {
             throw new Exception(null, null);
         }
-
         tokens.remove(0);
 
         return new varDecNode(v_type, v_id);
