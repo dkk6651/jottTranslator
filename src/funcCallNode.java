@@ -8,7 +8,7 @@ public class funcCallNode implements JottTree {
     public funcCallNode() {
     }
 
-    public static JottTree parse(ArrayList<Token> tokens){
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.get(0);
         funcCallNode node = new funcCallNode();
         if(token.getTokenType() == TokenType.FC_HEADER){
@@ -43,7 +43,7 @@ public class funcCallNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        return String.format("%s%s[%s]", this.fcHeader.convertToJott(), this.id.convertToJott(), this.params.convertToJott());
     }
 
     @Override

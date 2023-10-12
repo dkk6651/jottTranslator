@@ -13,7 +13,7 @@ public class boolNode extends exprNode {
 
     @Override
     public String convertToJott() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override

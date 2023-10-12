@@ -88,7 +88,7 @@ public class JottTokenizer {
 							}
 							result.add(new Token(number.toString(), filename, lineNumber, TokenType.NUMBER));
 						}
-						else if(i+1 <= array.length || !isNumeric(array[i+1])){
+						else if(i+1 >= array.length || !isNumeric(array[i+1])){
 							System.err.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
 									filename + ":" + lineNumber);

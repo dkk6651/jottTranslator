@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class typeNode implements JottTree {
-    private String value;
+    Token token;
 
     public typeNode(Token token){
-        this.value = token.getToken();
+        this.token = token;
     }
 
     public static JottTree parse(ArrayList<Token> tokens) {
-        Token token = tokens.remove(0);
+        Token token = tokens.get(0);
         typeNode node;
         if(token.getToken().equals("Double") || token.getToken().equals("Integer") ||
                 token.getToken().equals("String") || token.getToken().equals("Boolean)")){
-            node = new typeNode(token);
+            node = new typeNode(tokens.remove(0));
         }
         else{
             System.err.println(); //@Todo Implement syntax error message
@@ -23,7 +23,7 @@ public class typeNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override
