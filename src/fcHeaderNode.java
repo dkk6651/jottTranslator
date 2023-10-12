@@ -1,3 +1,9 @@
+/**File Name: fcHeaderNode.java
+ * Description: Responsible for anything related to function header.
+ *
+ * @author: Daniel Kim
+ */
+
 import java.util.ArrayList;
 
 public class fcHeaderNode implements JottTree {

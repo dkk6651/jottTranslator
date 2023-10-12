@@ -1,3 +1,9 @@
+/**File Name: funcCallNode.java
+ * Description: Responsible for handling everything related to function call node in Jott grammar.
+ *
+ * @author: Daniel Kim
+ */
+
 import java.util.ArrayList;
 
 public class funcCallNode implements JottTree {

@@ -1,3 +1,7 @@
+/**
+ * @author Jonas Long 
+*/
+
 import java.util.ArrayList;
 
 public class paramsTNode implements JottTree {

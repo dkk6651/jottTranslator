@@ -1,3 +1,6 @@
+/**
+ * @author: Ishan Shah is4761
+ */
 import java.util.ArrayList;
 
 public class ifStmtNode implements JottTree {
@@ -78,7 +81,7 @@ public class ifStmtNode implements JottTree {
             }
         }
         if(hasElse!=null){
-            ifString.concat(hasElse.convertToJava(ifString));
+            ifString.concat(hasElse.convertToJott());
         }
         return ifString;
     }

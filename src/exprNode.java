@@ -1,3 +1,9 @@
+/**File Name: exprNode.java
+ * Description: Responsible for handling anything related to expression nodes in Jott Grammar.
+ *
+ * @author: Daniel Kim
+ **/
+
 import java.util.ArrayList;
 
 public abstract class exprNode implements JottTree {
@@ -22,8 +28,7 @@ public abstract class exprNode implements JottTree {
             node = funcCallNode.parse(tokens);
         }
         else{
-            System.err.println(); //@Todo implement syntax error message
-            return null;
+            throw new Exception();
         }
 
         if(tokens.get(0).getTokenType() == TokenType.MATH_OP || tokens.get(0).getTokenType() == TokenType.REL_OP){
@@ -32,30 +37,5 @@ public abstract class exprNode implements JottTree {
         else{
             return node;
         }
-    }
-
-    @Override
-    public String convertToJott() {
-        return null;
-    }
-
-    @Override
-    public String convertToJava(String className) {
-        return null;
-    }
-
-    @Override
-    public String convertToC() {
-        return null;
-    }
-
-    @Override
-    public String convertToPython() {
-        return null;
-    }
-
-    @Override
-    public boolean validateTree() {
-        return false;
     }
 }
