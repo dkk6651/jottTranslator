@@ -81,7 +81,7 @@ public class ifStmtNode implements JottTree {
             }
         }
         if(hasElse!=null){
-            ifString.concat(hasElse.convertToJava(ifString));
+            ifString.concat(hasElse.convertToJott());
         }
         return ifString;
     }
