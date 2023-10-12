@@ -20,7 +20,12 @@ public class programNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return null;
+        StringBuilder jottOutput = new StringBuilder();
+        for (JottTree funcDef : functionDefNodes) {
+            jottOutput.append(funcDef);
+            jottOutput.append(" ");
+        }
+        return jottOutput.toString();
     }
 
     @Override

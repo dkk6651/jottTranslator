@@ -17,9 +17,10 @@ public class JottParser {
      */
     public static JottTree parse(ArrayList<Token> tokens){
 		try{
-            programNode.parse(tokens);
+            return programNode.parse(tokens);
         } catch (Exception e) {
             System.out.println(e);
+            return null;
         }
     }
 
