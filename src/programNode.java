@@ -14,7 +14,7 @@ public class programNode implements JottTree {
         pNode.functionDefNodes = new ArrayList<>();
 
         while (tokens.size() > 0) {
-            pNode.functionDefNodes.append(functionDefNode.parse(tokens));
+            pNode.functionDefNodes.add(functionDefNode.parse(tokens));
         }
     }
 

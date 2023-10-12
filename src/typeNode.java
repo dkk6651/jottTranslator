@@ -1,3 +1,9 @@
+/**File Name: typeNode.java
+ * Description: Responsible for handling everything related to type node in Jott grammar.
+ *
+ * @author: Daniel Kim
+ */
+
 import java.util.ArrayList;
 
 public class typeNode implements JottTree {
@@ -7,7 +13,7 @@ public class typeNode implements JottTree {
         this.token = token;
     }
 
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception{
         Token token = tokens.get(0);
         typeNode node;
         if(token.getToken().equals("Double") || token.getToken().equals("Integer") ||
@@ -15,8 +21,7 @@ public class typeNode implements JottTree {
             node = new typeNode(tokens.remove(0));
         }
         else{
-            System.err.println(); //@Todo Implement syntax error message
-            return null;
+            throw new Exception();
         }
         return node;
     }

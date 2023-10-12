@@ -1,3 +1,9 @@
+/**File Name: idNode.java
+ * Description: Responsible for handling anything related
+ *
+ * @author:
+ */
+
 import java.util.ArrayList;
 
 public class idNode extends exprNode{

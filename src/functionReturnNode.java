@@ -1,32 +1,34 @@
   import java.util.ArrayList;
 
 public class functionReturnNode implements JottTree {
-    private String value;
     private JottTree typeReturn;
-
-    public functionReturnNode(Token token){
-        this.value = token.getToken();
-    }
 
     public functionReturnNode(){}
 
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception{
         Token token = tokens.get(0);
         if (token.getToken().equals("Void")) {
-            token = tokens.remove(0);
-            return new functionReturnNode(token);
+            tokens.remove(0);
+            return new functionReturnNode();
+        }
+        else if(token.getTokenType() == TokenType.ID_KEYWORD){
+            functionReturnNode node = new functionReturnNode();
+            node.typeReturn = typeNode.parse(tokens);
+            return node;
         }
         else{
-            JottTree type = typeNode.parse(tokens);
-            functionReturnNode node = new functionReturnNode();
-            node.typeReturn = type;
-            return node;
+            throw new Exception();
         }
     }
 
     @Override
     public String convertToJott() {
-        return null;
+        if(this.typeReturn == null){
+            return "Void";
+        }
+        else{
+            return this.typeReturn.convertToJott();
+        }
     }
 
     @Override

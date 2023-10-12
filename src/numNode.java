@@ -1,3 +1,9 @@
+/**File Name: numNode.java
+ * Description: Responsible for handling all things related to number nodes in Jott grammar.
+ *
+ * @author: Daniel Kim
+ */
+
 import java.util.ArrayList;
 
 public class numNode extends exprNode {
@@ -13,7 +19,7 @@ public class numNode extends exprNode {
 
     @Override
     public String convertToJott() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override

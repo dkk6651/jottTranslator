@@ -7,15 +7,14 @@ public class opNode implements JottTree {
         this.token = token;
     }
 
-    public static JottTree parse(ArrayList<Token> tokens){
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception{
         Token token = tokens.get(0);
         opNode node;
         if(token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP){
             node = new opNode(tokens.remove(0));
         }
         else{
-            System.err.println(); //@Todo Implement syntax error message
-            return null;
+            throw new Exception();
         }
         return node;
     }
