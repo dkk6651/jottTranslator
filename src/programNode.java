@@ -1,4 +1,23 @@
+/**
+ * @author Jonas Long
+ */
+
+import java.util.ArrayList;
+
 public class programNode implements JottTree {
+    ArrayList<JottTree> functionDefNodes;
+
+    public programNode() {}
+
+    public static JottTree parse(ArrayList<Token> tokens) throws Exception {
+        programNode pNode = new programNode();
+        pNode.functionDefNodes = new ArrayList<>();
+
+        while (tokens.size() > 0) {
+            pNode.functionDefNodes.append(functionDefNode.parse(tokens));
+        }
+    }
+
     @Override
     public String convertToJott() {
         return null;
