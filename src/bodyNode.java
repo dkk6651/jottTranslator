@@ -1,25 +1,25 @@
 import java.util.ArrayList;
 
 public class bodyNode implements JottTree {
-    private JottTree body_stmt;
+    private ArrayList<JottTree> body_stmt;
     private JottTree return_stmt;
 
-    public bodyNode(JottTree body_stmt, JottTree return_stmt) {
+    public bodyNode(ArrayList<JottTree> body_stmt, JottTree return_stmt) {
         this.body_stmt = body_stmt;
         this.return_stmt = return_stmt;
     }
 
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
-        boolean foundEnd = false;
+        ArrayList<JottTree> bodyList = new ArrayList<>();
 
-        while (!foundEnd) {
-            
+        while(tokens.get(0).getToken().equals("return")){
+            bodyList.add(bodyStmtNode.parse(tokens));
         }
 
         // parse for return statement
         JottTree b_return_stmt = bodyStmtNode.parse(tokens);
 
-        return null;
+        return new bodyNode(bodyList, b_return_stmt);
     }
 
     @Override
