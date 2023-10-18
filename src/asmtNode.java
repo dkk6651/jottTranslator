@@ -35,7 +35,7 @@ public class asmtNode implements JottTree {
 
         // check for equals sign
         if (tokens.get(0).getTokenType() != TokenType.ASSIGN) {
-            throw new Exception(null, null);
+            throw new Exception(String.format("Syntax Error\n Token is not an assignment\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
         }
         tokens.remove(0);
 
@@ -44,7 +44,7 @@ public class asmtNode implements JottTree {
 
         // check for semicolon
         if (tokens.get(0).getTokenType() != TokenType.SEMICOLON) {
-            throw new Exception(null, null);
+            throw new Exception(String.format("Syntax Error\n Missing semicolon\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
         }
         tokens.remove(0);
 

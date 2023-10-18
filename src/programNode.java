@@ -13,9 +13,10 @@ public class programNode implements JottTree {
         programNode pNode = new programNode();
         pNode.functionDefNodes = new ArrayList<>();
 
-        while (tokens.size() > 0) {
+        while (!tokens.isEmpty()) {
             pNode.functionDefNodes.add(functionDefNode.parse(tokens));
         }
+        return pNode;
     }
 
     @Override

@@ -16,16 +16,17 @@ public class returnStmtNode implements JottTree {
 
         // check for "return"
         if (!token.getToken().equals("return")) {
-            throw new Exception(null, null);
+            throw new Exception(String.format("Syntax Error\nMissing return statement\n%s:%d", token.getFilename(), token.getLineNum()));
         }
         tokens.remove(0);
 
         // parse for expression
         JottTree r_expr = exprNode.parse(tokens);
+        token = tokens.get(0);
 
         // check for semicolon
         if (token.getTokenType() != TokenType.SEMICOLON) {
-            throw new Exception(null, null);
+            throw new Exception(String.format("Syntax Error\nMissing semicolon\n%s:%d", token.getFilename(), token.getLineNum()));
         }
         tokens.remove(0);
 

@@ -1,5 +1,5 @@
 #should fail phase 2
-#missing comma in paramsNode
+#missing comma in params
 #Error: Expected <comma> or ] got <id>
 
 def foo[x:Integer y:Double]:Double

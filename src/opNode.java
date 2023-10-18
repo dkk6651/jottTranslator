@@ -14,7 +14,7 @@ public class opNode implements JottTree {
             node = new opNode(tokens.remove(0));
         }
         else{
-            throw new Exception();
+            throw new Exception(String.format("Syntax Error\nMissing math operator\n%s:%d", token.getFilename(), token.getLineNum()));
         }
         return node;
     }

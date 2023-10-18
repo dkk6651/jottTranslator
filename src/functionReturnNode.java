@@ -17,7 +17,7 @@ public class functionReturnNode implements JottTree {
             return node;
         }
         else{
-            throw new Exception();
+            throw new Exception(String.format("Syntax Error\nToken missing return statement\n%s:%d", token.getFilename(), token.getLineNum()));
         }
     }
 

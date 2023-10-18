@@ -21,7 +21,7 @@ public class typeNode implements JottTree {
             node = new typeNode(tokens.remove(0));
         }
         else{
-            throw new Exception();
+            throw new Exception(String.format("Syntax Error\nMissing token type\n%s:%d", token.getFilename(), token.getLineNum()));
         }
         return node;
     }

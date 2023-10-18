@@ -20,8 +20,7 @@ public class funcCallNode implements JottTree {
         if(token.getTokenType() == TokenType.FC_HEADER){
             node.fcHeader = fcHeaderNode.parse(tokens);
             if(tokens.get(0).getTokenType() != TokenType.ID_KEYWORD){
-                System.err.println();
-                return null;
+                throw new Exception(String.format("Syntax Error\nToken is not an ID\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
             }
             node.id = idNode.parse(tokens);
             if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
@@ -32,18 +31,15 @@ public class funcCallNode implements JottTree {
                     return node;
                 }
                 else{
-                    System.err.println();
-                    return null;
+                    throw new Exception(String.format("Syntax Error\nMissing right bracket ']'\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
                 }
             }
             else{
-                System.err.println();
-                return null;
+                throw new Exception(String.format("Syntax Error\nMissing left bracket '['\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
             }
         }
         else{
-            System.err.println();
-            return null;
+            throw new Exception(String.format("Syntax Error\nMissing function header\n%s:%d", token.getFilename(), token.getLineNum()));
         }
     }
 

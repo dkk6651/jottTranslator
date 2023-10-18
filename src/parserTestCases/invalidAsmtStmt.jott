@@ -1,5 +1,5 @@
 #this will fail phase 2
-#should be a opNode of end_stmt
+#should be a op of end_stmt
 #Error: Unexpected token <string> after <int>
 
 def main[]:Void{

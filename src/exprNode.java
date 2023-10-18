@@ -28,7 +28,7 @@ public abstract class exprNode implements JottTree {
             node = funcCallNode.parse(tokens);
         }
         else{
-            throw new Exception();
+            throw new Exception(String.format("Syntax Error\n Token can not be parsed into a Expression Node\n%s:%d", token.getFilename(), token.getLineNum()));
         }
 
         if(tokens.get(0).getTokenType() == TokenType.MATH_OP || tokens.get(0).getTokenType() == TokenType.REL_OP){

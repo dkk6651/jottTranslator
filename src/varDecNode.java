@@ -18,7 +18,7 @@ public class varDecNode implements JottTree {
 
         // check for semicolon
         if (tokens.get(0).getTokenType() != TokenType.SEMICOLON) {
-            throw new Exception(null, null);
+            throw new Exception(String.format("Syntax Error\nMissing semicolon\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
         }
         tokens.remove(0);
 

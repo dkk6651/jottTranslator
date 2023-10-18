@@ -1,8 +1,8 @@
 #this should fail phase 2
 #there error is the second - since it is followed by a another minus
 #The second minus on that row is the negative. The first then must be a subtraction
-#Since there is not <exprNode> before it, it is an error.
-#Error: <opNode> without leading <exprNode>
+#Since there is not <expr> before it, it is an error.
+#Error: <op> without leading <expr>
 
 def main[]:Void{
     Integer x = -4;
