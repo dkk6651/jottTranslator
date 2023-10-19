@@ -58,14 +58,14 @@ public class asmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        String output = null;
+        String output = "";
 
         if (type != null) {
-            output += type.convertToJott();
+            output += type.convertToJott() + " ";
         }
         
         output += id.convertToJott();
-        output += "=";
+        output += " = ";
         output += expr.convertToJott();
         output += ";";
 

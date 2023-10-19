@@ -19,7 +19,7 @@ public class binaryExprNode extends exprNode{
 
     @Override
     public String convertToJott(){
-        return String.format("%s%s%s", this.left.convertToJott(), this.op.convertToJott(), this.right.convertToJott());
+        return String.format("%s %s %s", this.left.convertToJott(), this.op.convertToJott(), this.right.convertToJott());
     }
 
     @Override
