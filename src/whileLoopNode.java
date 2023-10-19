@@ -7,7 +7,7 @@ public class whileLoopNode implements JottTree {
 
     public String value;
     public JottTree condition;
-    public JottTree bodyNode;
+    public JottTree body_node;
 
     public whileLoopNode(Token token){
         this.value = token.getToken();
@@ -45,7 +45,7 @@ public class whileLoopNode implements JottTree {
                     }
                     else{
                         tokens.remove(0);
-                        node.bodyNode = bodyStmtNode.parse(tokens);
+                        node.body_node = bodyNode.parse(tokens);
                         // check for }
                         next_token = tokens.remove(0);
                         if (!next_token.getToken().equals("}")) {
@@ -64,7 +64,7 @@ public class whileLoopNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return "while["+condition.convertToJott()+"]{"+bodyNode.convertToJott()+"}";
+        return "while["+condition.convertToJott()+"]{"+body_node.convertToJott()+"}";
     }
 
     @Override

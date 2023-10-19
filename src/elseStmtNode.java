@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class elseStmtNode implements JottTree {
 
     public String value;
-    public JottTree bodyNode;
+    public JottTree body_node;
 
     public elseStmtNode(Token token){
         this.value = token.getToken();
@@ -27,7 +27,7 @@ public class elseStmtNode implements JottTree {
             }
             else{
                 tokens.remove(0);
-                node.bodyNode = bodyStmtNode.parse(tokens);
+                node.body_node = bodyNode.parse(tokens);
                 // check for }
                 next_token = tokens.remove(0);
                 if (!next_token.getToken().equals("}")) {
@@ -41,7 +41,7 @@ public class elseStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return "else{" + bodyNode.convertToJott() + "}";
+        return "else{" + body_node.convertToJott() + "}";
     }
 
     @Override

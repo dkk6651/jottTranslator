@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ifStmtNode implements JottTree {
     
     public String value;
-    public JottTree bodyNode;
+    public JottTree body_node;
     public JottTree condition;
     public ArrayList<JottTree> elseifLst;
     public JottTree hasElse;
@@ -47,7 +47,7 @@ public class ifStmtNode implements JottTree {
                     }
                     else{
                         tokens.remove(0);
-                        node.bodyNode = bodyStmtNode.parse(tokens);
+                        node.body_node = bodyNode.parse(tokens);
                         // check for }
                         next_token = tokens.remove(0);
                         if (!next_token.getToken().equals("}")) {
@@ -74,7 +74,7 @@ public class ifStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        String ifString = "if[" + condition.convertToJott() + "]{" + bodyNode.convertToJott() + "}";
+        String ifString = "if[" + condition.convertToJott() + "]{" + body_node.convertToJott() + "}";
         if(!elseifLst.isEmpty()){
             for (JottTree jottTree : elseifLst) {
                 ifString.concat(jottTree.convertToJott());

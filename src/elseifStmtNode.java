@@ -7,7 +7,7 @@ public class elseifStmtNode implements JottTree {
 
     public String value;
     public JottTree condition;
-    public JottTree bodyNode;
+    public JottTree body_node;
 
     public elseifStmtNode(Token token){
         this.value = token.getToken();
@@ -45,7 +45,7 @@ public class elseifStmtNode implements JottTree {
                     }
                     else{
                         tokens.remove(0);
-                        node.bodyNode = bodyStmtNode.parse(tokens);
+                        node.body_node = bodyNode.parse(tokens);
                         // check for }
                         next_token = tokens.remove(0);
                         if (!next_token.getToken().equals("}")) {
@@ -63,7 +63,7 @@ public class elseifStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        return "elseif[" + condition.convertToJott() + "]{" + bodyNode.convertToJott() + "}";
+        return "elseif[" + condition.convertToJott() + "]{" + body_node.convertToJott() + "}";
     }
 
     @Override
