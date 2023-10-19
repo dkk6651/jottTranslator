@@ -19,7 +19,7 @@ public class JottParser {
 		try{
             return programNode.parse(tokens);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
     }

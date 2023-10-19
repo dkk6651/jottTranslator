@@ -16,7 +16,12 @@ public abstract class bodyStmtNode {
 
         // check if function call
         else if (token.getTokenType() == TokenType.FC_HEADER) {
-            return funcCallNode.parse(tokens);
+            JottTree node = funcCallNode.parse(tokens);
+            if(tokens.get(0).getTokenType() != TokenType.SEMICOLON){
+                throw new Exception(String.format("Syntax Error:\nExpected ':' as next token\n%s:%d",tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
+            }
+            tokens.remove(0);
+            return node;
         } else if (token.getTokenType() == TokenType.ID_KEYWORD) {
             if(token.getToken().equals("Double") || token.getToken().equals("Integer") || token.getToken().equals("String") || token.getToken().equals("Boolean")){
                 // Look 2 tokens ahead

@@ -16,7 +16,6 @@ public class funcDefParamsNode implements JottTree {
         Token token = tokens.get(0);
         funcDefParamsNode node = new funcDefParamsNode();
         if (token.getToken().equals("]")){
-            tokens.remove(0);
             return null;
         }else if (token.getTokenType() != TokenType.ID_KEYWORD){
             throw new Exception(String.format("Syntax Error\nToken cannot be pared into ID\n%s:%d", token.getFilename(), token.getLineNum())) ;

@@ -54,7 +54,14 @@ public class functionDefNode implements JottTree {
     }
     @Override
     public String convertToJott() {
-        return "def " + this.funcName.convertToJott() + "[" + this.params.convertToJott() + "]:" + this.returnNode.convertToJott() + "{" + this.body.convertToJott() + "}";
+        String params;
+        if(this.params == null){
+            params = "";
+        }
+        else{
+            params = this.params.convertToJott();
+        }
+        return "def " + this.funcName.convertToJott() + "[" + params + "]:" + this.returnNode.convertToJott() + "{" + this.body.convertToJott() + "}";
     }
 
     @Override

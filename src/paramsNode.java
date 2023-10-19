@@ -46,7 +46,7 @@ public class paramsNode implements JottTree {
             ArrayList<String> paramStrs = new ArrayList<>();
             expressions.forEach(itm -> {paramStrs.add(itm.convertToJott());});
 
-            return String.format("%s, %s",expressionNode.convertToJott(), String.join(" ", paramStrs));
+            return String.format("%s%s",expressionNode.convertToJott(), String.join(" ", paramStrs));
         }
     }
 
