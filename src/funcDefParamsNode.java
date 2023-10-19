@@ -40,8 +40,10 @@ public class funcDefParamsNode implements JottTree {
     public String convertToJott() {
         StringBuilder string = new StringBuilder(this.id.convertToJott() + ":" + this.type.convertToJott());
 
-        while(!params.isEmpty()){
-            string.append(params.get(0).convertToJott());
+        if(params != null) {
+            while (!params.isEmpty()) {
+                string.append(params.get(0).convertToJott());
+            }
         }
 
         return string.toString();

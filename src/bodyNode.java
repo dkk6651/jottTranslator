@@ -12,6 +12,7 @@ public class bodyNode implements JottTree {
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         ArrayList<JottTree> bodyList = new ArrayList<>();
 
+        if(tokens.get(0).getTokenType() == TokenType.R_BRACE) return new bodyNode(bodyList, null);
         while(!tokens.get(0).getToken().equals("return")){
             bodyList.add(bodyStmtNode.parse(tokens));
             if(tokens.get(0).getTokenType() == TokenType.R_BRACE) return new bodyNode(bodyList, null);
