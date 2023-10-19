@@ -28,7 +28,7 @@ public class JottTokenizer {
 			while((line = reader.readLine()) != null){
 				String[] array = line.split("");
 				for(int i = 0; i < array.length; i++){
-					if(array[i].equals("\n")){
+					if(array[i].equals("\n") || array[i].equals("")){
 						continue;
 					}
 					else if(array[i].equals(" ")){
