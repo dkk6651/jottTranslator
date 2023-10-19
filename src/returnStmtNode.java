@@ -35,17 +35,10 @@ public class returnStmtNode implements JottTree {
 
     @Override
     public String convertToJott() {
-        String output = null;
-
         if (expr == null){
-            return output;
+            return null;
         }
-
-        output += "return";
-        output += expr.convertToJott();
-        output += ";";
-
-        return output;
+        return String.format("return %s;",expr.convertToJott());
     }
 
     @Override
