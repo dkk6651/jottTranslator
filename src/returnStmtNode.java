@@ -1,3 +1,7 @@
+/**
+ * @author Cole Allen; cda9685
+ */
+
 import java.util.ArrayList;
 
 public class returnStmtNode implements JottTree {

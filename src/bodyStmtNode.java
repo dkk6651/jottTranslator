@@ -1,3 +1,8 @@
+/**
+ * @author Cole Allen; cda9685
+ * @author Daniel Kim; dkk6651
+ */
+
 import java.util.ArrayList;
 
 public abstract class bodyStmtNode {
