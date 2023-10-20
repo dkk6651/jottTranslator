@@ -32,7 +32,7 @@ public class JottTokenizer {
 			while((line = reader.readLine()) != null){
 				String[] array = line.split("");
 				for(int i = 0; i < array.length; i++){
-					if(array[i].equals("\n")){
+					if(array[i].equals("\n") || array[i].equals("")){
 						continue;
 					}
 					else if(array[i].equals(" ")){
@@ -92,7 +92,7 @@ public class JottTokenizer {
 							}
 							result.add(new Token(number.toString(), filename, lineNumber, TokenType.NUMBER));
 						}
-						else if(i+1 <= array.length || !isNumeric(array[i+1])){
+						else if(i+1 >= array.length || !isNumeric(array[i+1])){
 							System.err.println("Syntax Error\n" +
 									"Invalid token \"" + array[i] +"\"\n" +
 									filename + ":" + lineNumber);

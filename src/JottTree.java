@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Interface for all Jott parse tree nodes
  *

@@ -1,4 +1,4 @@
-#this will pass phase 2 but fail phase 3 for foo param type not matching
+#this will pass phase 2 but fail phase 3 for foo param typeNode not matching
 
 def foo[y:Double]:Integer{
     print[y];

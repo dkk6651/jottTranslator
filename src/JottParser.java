@@ -2,14 +2,12 @@
  * This class is responsible for paring Jott Tokens
  * into a Jott parse tree.
  *
- * @author
+ * @author Jonas Long
  */
 
 import java.util.ArrayList;
 
 public class JottParser {
-
-
 
     /**
      * Parses an ArrayList of Jotton tokens into a Jott Parse Tree.
@@ -18,7 +16,12 @@ public class JottParser {
      *         or null upon an error in parsing.
      */
     public static JottTree parse(ArrayList<Token> tokens){
-		return null;
+		try{
+            return programNode.parse(tokens);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

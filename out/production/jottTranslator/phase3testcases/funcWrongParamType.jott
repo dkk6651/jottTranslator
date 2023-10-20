@@ -1,4 +1,4 @@
-#this will fail phase 3 for wrong type of return in function call.
+#this will fail phase 3 for wrong typeNode of return in function call.
 
 def foo[x:Double]:Integer{
     return x + 1.0;
