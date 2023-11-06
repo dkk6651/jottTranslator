@@ -1,9 +1,10 @@
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class SymbolTable {
-    HashMap<String, HashMap<String, ReturnType>> functions = new HashMap<>();
+    HashMap<String, LinkedHashMap<String, ReturnType>> functions = new HashMap<>();
     public static SymbolTable symTable = new SymbolTable();
-    public static HashMap<String, ReturnType> scope;
+    public static LinkedHashMap<String, ReturnType> scope;
 
     /**
      * Adds function to the symbol table
@@ -15,7 +16,7 @@ public class SymbolTable {
         if(functions.containsKey(name)){
             return false;
         }
-        functions.put(name, new HashMap<>());
+        functions.put(name, new LinkedHashMap<>());
         functions.get(name).put("return", returnType);
         return true;
     }
@@ -79,7 +80,7 @@ public class SymbolTable {
     }
 
     public void enterScope(String funcName){
-        scope = new HashMap<String, ReturnType>(functions.get(funcName));
+        scope = new LinkedHashMap<String, ReturnType>(functions.get(funcName));
     }
 
     public void exitScope(){
