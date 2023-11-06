@@ -14,7 +14,7 @@ public class returnStmtNode implements JottTree {
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         Token token = tokens.get(0);
 
-        if (token == null) {
+        if (token.getTokenType() == TokenType.R_BRACE) {
             return null;
         }
 

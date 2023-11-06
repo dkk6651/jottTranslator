@@ -2,7 +2,8 @@ import java.util.HashMap;
 
 public class SymbolTable {
     HashMap<String, HashMap<String, ReturnType>> functions = new HashMap<>();
-    public SymbolTable(){}
+    public static SymbolTable symTable = new SymbolTable();
+    public static HashMap<String, ReturnType> scope;
 
     /**
      * Adds function to the symbol table
@@ -75,5 +76,21 @@ public class SymbolTable {
      */
     public Boolean checkFuncReturn(String funcName, ReturnType type){
         return functions.get(funcName).get("return") == type;
+    }
+
+    public void enterScope(String funcName){
+        scope = new HashMap<String, ReturnType>(functions.get(funcName));
+    }
+
+    public void exitScope(){
+        scope.clear();
+    }
+
+    public Boolean paramInScope(String param){
+        return functions.get(scope).containsKey(param);
+    }
+
+    public Boolean paramInScopeMatchType(String param, ReturnType type){
+        return functions.get(scope).get(param) == type;
     }
 }

@@ -22,6 +22,9 @@ public class funcCallNode implements JottTree {
             if(tokens.get(0).getTokenType() != TokenType.ID_KEYWORD){
                 throw new Exception(String.format("Syntax Error\nToken is not an ID\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
             }
+            if(!node.validateTree()){
+                throw new Exception(String.format("Semantic Error\nFunction is not defined\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
+            }
             node.id = idNode.parse(tokens);
             if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
                 tokens.remove(0);
@@ -65,6 +68,6 @@ public class funcCallNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        return false;
+        return SymbolTable.symTable.checkFunc(this.id.convertToJott());
     }
 }
