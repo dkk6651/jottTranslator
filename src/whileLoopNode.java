@@ -84,6 +84,7 @@ public class whileLoopNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        return false;
+        //check boolean condition
+        return this.condition.validateTree() && this.body_node.validateTree();
     }
 }
