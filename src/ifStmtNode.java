@@ -103,6 +103,20 @@ public class ifStmtNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        return false;
+        // check boolean condition
+        if(!(condition.validateTree() && body_node.validateTree())){
+            return false;
+        }
+        if(!elseifLst.isEmpty()){
+            for (JottTree jottTree : elseifLst) {
+                if(!jottTree.validateTree()){
+                    return false;
+                }
+            }
+        }
+        if(hasElse!=null && !hasElse.validateTree()){
+            return false;
+        }
+        return true;
     }
 }
