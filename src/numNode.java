@@ -54,7 +54,7 @@ public class numNode extends exprNode {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() {
+        return null;
     }
 }
