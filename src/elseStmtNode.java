@@ -60,7 +60,7 @@ public class elseStmtNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
+    public ReturnType validateTree() throws Exception{
         return body_node.validateTree();
     }
 }
