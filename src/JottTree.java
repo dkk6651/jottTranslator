@@ -33,8 +33,9 @@ public interface JottTree {
 
     /**
      * This will validate that the tree follows the semantic rules of Jott
-	 * Errors validating will be reported to System.err
-     * @return true if valid Jott code; false otherwise
+     * Errors validating will be reported to System.err
+     * @return A ReturnType instance if the node represents an object that can return a value, null otherwise
+     * @throws Exception with an appropriate message any part of the tree is invalid
      */
-    public ReturnType validateTree();
+    public ReturnType validateTree() throws Exception;
 }

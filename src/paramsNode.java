@@ -3,6 +3,8 @@
 */
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 
 public class paramsNode implements JottTree {
     public JottTree expressionNode;
@@ -17,7 +19,7 @@ public class paramsNode implements JottTree {
         node.expressions = expressions; //shallow copy the list to node ahead of time
 
         Token curToken = tokens.get(0);
-        if(curToken.getTokenType() == TokenType.R_BRACKET){
+        if (curToken.getTokenType() == TokenType.R_BRACKET) {
             return node;
         } else {
             node.expressionNode = exprNode.parse(tokens);
@@ -34,7 +36,8 @@ public class paramsNode implements JottTree {
                     }
                 }
             }
-            throw new Exception(String.format("Syntax Error\nToken can not be parsed into a ParamsNode\n%s:%d", curToken.getFilename(), curToken.getLineNum()));
+            throw new Exception(String.format("Syntax Error\nToken can not be parsed into a ParamsNode\n%s:%d",
+                    curToken.getFilename(), curToken.getLineNum()));
         }
     }
 
@@ -66,7 +69,49 @@ public class paramsNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        LinkedHashMap<String, ReturnType> scope = SymbolTable.scope;
+
+        //function has no params, func call was given no params
+        if (expressionNode == null && scope.size() == 0) {
+            return null; //valid
+        }
+
+        //assume that the parent func call node entered the scope of the target function when validating
+        //check length
+        if (expressions.size() + 1 != scope.size() - 1) { //plus one because the root expr node isn't in the list
+            throw new Exception(String.format("Wrong number of arguments for function (expected %d, got %d)",
+                    scope.size(), expressions.size()));
+        }
+
+        ArrayList<ReturnType> functionParams = new ArrayList<>(scope.values());
+        //ignore index 0, which is the function return type
+
+        ReturnType firstExpressionType = expressionNode.validateTree(); //check the type of the first param
+        checkExpressionTypes(firstExpressionType, functionParams.get(1)); 
+
+        //type checking
+        for (int i = 0; i < expressions.size(); i++) {
+
+            paramsTNode expr = (paramsTNode) expressions.get(i);
+            ReturnType expressionType = expr.validateTree();
+
+            int targetIndex = i + 2;
+            ReturnType funcParamType = functionParams.get(targetIndex); //skip first and second entries (the return value and first param)
+
+            checkExpressionTypes(expressionType, funcParamType);
+        }
+
+        //valid
+        return null; //don't return the functon type here, return it in the function call node
+    }
+    
+    private void checkExpressionTypes(ReturnType expressionType, ReturnType funcParamType) throws Exception {
+        if (!expressionType.equals(funcParamType)) {
+            throw new Exception(
+                    String.format("Wrong type for the function call parameter. (expected type %s, got %s)",
+                            funcParamType, expressionType));
+            
+        }
     }
 }
