@@ -82,8 +82,13 @@ public class elseifStmtNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        // check boolean condition
-        return condition.validateTree() && body_node.validateTree();
+    public ReturnType validateTree() throws Exception{
+        // TODO: need to format error message
+        if(condition.validateTree() != ReturnType.Boolean){
+            throw new Exception(String.format("Semantic Error\n Excpected boolean condition"));
+        }
+        ReturnType verify = body_node.validateTree();
+
+        return verify;
     }
 }
