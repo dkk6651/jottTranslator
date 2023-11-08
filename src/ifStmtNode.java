@@ -102,21 +102,21 @@ public class ifStmtNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        // check boolean condition
-        if(!(condition.validateTree() && body_node.validateTree())){
-            return false;
+    public ReturnType validateTree() throws Exception{
+        // TODO: need to format error message
+        if(condition.validateTree() != ReturnType.Boolean){
+            throw new Exception(String.format("Semantic Error\n Excpected boolean condition"));
         }
+        
+        ReturnType verify = body_node.validateTree();
         if(!elseifLst.isEmpty()){
             for (JottTree jottTree : elseifLst) {
-                if(!jottTree.validateTree()){
-                    return false;
-                }
+                verify = jottTree.validateTree();
             }
         }
-        if(hasElse!=null && !hasElse.validateTree()){
-            return false;
+        if(hasElse!=null){
+            verify = hasElse.validateTree();
         }
-        return true;
+        return verify;
     }
 }
