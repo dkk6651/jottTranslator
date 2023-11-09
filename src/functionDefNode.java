@@ -80,7 +80,10 @@ public class functionDefNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public boolean validateTree() { 
+        returnType = this.returnNode.typeReturn
+        SymbolTable.addFunc(this.funcName, returnType)
+        for param in this.params:
+            SymbolTable.addParamToFunc(this.funcName, param.id, returnType)
     }
 }
