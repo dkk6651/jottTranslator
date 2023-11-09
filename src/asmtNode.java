@@ -94,6 +94,7 @@ public class asmtNode implements JottTree {
     @Override
     public ReturnType validateTree() throws Exception {
         if (type == null) {
+
             // Checks whether this id exists already & return its type
             if (id.validateTree() != null) {
                 throw new Exception(String.format("Semantic Error\nThe id '%s' is already in use", id));
