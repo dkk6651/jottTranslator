@@ -85,7 +85,7 @@ public class whileLoopNode implements JottTree {
     @Override
     public ReturnType validateTree() throws Exception{
         if(condition.validateTree() != ReturnType.Boolean){
-            throw new Exception(String.format("Semantic Error\n Excpected boolean condition"+value.getFilename()+": "+value.getLineNum()));
+            throw new Exception(String.format("Semantic Error\n Excpected boolean condition\n"+value.getFilename()+": "+value.getLineNum()));
         }
         ReturnType verify = body_node.validateTree();
 
