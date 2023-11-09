@@ -6,7 +6,7 @@ Author: JD Rears jar6256
 import java.util.ArrayList;
 
 public class funcDefParamsNode implements JottTree {
-    private ArrayList<JottTree> params;
+    private ArrayList<JottTree> params = new ArrayList<>();
     private JottTree type;
     private JottTree id;
     
@@ -40,12 +40,10 @@ public class funcDefParamsNode implements JottTree {
     public String convertToJott() {
         StringBuilder string = new StringBuilder(this.id.convertToJott() + ":" + this.type.convertToJott());
 
-        if(params != null) {
-            while (!params.isEmpty()) {
-                string.append(params.get(0).convertToJott());
-            }
+        while (!params.isEmpty()) {
+            string.append(params.get(0).convertToJott());
         }
-
+    
         return string.toString();
     }
 
@@ -66,7 +64,9 @@ public class funcDefParamsNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        SymbolTable.scope.put(id.convertToJott(), id.validateTree());
+        if (id != null) {
+            SymbolTable.scope.put(id.convertToJott(), id.validateTree());
+        }
         for (JottTree param : params) {
             param.validateTree();
         }
