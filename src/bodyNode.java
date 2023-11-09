@@ -26,7 +26,10 @@ public class bodyNode implements JottTree {
         // parse for return statement
         JottTree b_return_stmt = returnStmtNode.parse(tokens);
 
-        return new bodyNode(bodyList, b_return_stmt);
+        bodyNode body = new bodyNode(bodyList, b_return_stmt);
+        body.validateTree();
+
+        return body;
     }
 
     @Override
@@ -64,8 +67,8 @@ public class bodyNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        for (JottTree body : body_stmt) {
-            body.validateTree();
+        for (JottTree body_s : body_stmt) {
+            body_s.validateTree();
         }
 
         return_stmt.validateTree();
