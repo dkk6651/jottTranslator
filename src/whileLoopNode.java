@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class whileLoopNode implements JottTree {
 
-    public String value;
+    public Token value;
     public JottTree condition;
     public JottTree body_node;
 
     public whileLoopNode(Token token){
-        this.value = token.getToken();
+        this.value = token;
     }
 
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
@@ -84,9 +84,8 @@ public class whileLoopNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception{
-        // TODO: need to format error message
         if(condition.validateTree() != ReturnType.Boolean){
-            throw new Exception(String.format("Semantic Error\n Excpected boolean condition"));
+            throw new Exception(String.format("Semantic Error\n Excpected boolean condition\n"+value.getFilename()+": "+value.getLineNum()));
         }
         ReturnType verify = body_node.validateTree();
 

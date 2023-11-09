@@ -45,7 +45,7 @@ public class programNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() {
+        return null;
     }
 }

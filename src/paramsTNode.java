@@ -41,7 +41,7 @@ public class paramsTNode implements JottTree {
     }
 
     @Override
-    public ReturnType validateTree() {
+    public ReturnType validateTree() throws Exception {
         return expression.validateTree();
     }
 }

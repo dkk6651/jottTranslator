@@ -47,7 +47,7 @@ public class functionReturnNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        return typeReturn.validateTree();
     }
 }

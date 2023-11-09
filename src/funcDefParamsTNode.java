@@ -50,7 +50,8 @@ public class funcDefParamsTNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        SymbolTable.scope.put(id.convertToJott(), id.validateTree());
+        return id.validateTree();
     }
 }
