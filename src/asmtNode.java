@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 public class asmtNode implements JottTree {
-    private JottTree type = null;
+    private JottTree type;
     private exprNode id;
     private JottTree expr;
 
@@ -92,7 +92,28 @@ public class asmtNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        if (type == null) {
+            // Checks whether this id exists already & return its type
+            if (id.validateTree() != null) {
+                throw new Exception(String.format("Semantic Error\nThe id '%s' is already in use", id));
+            }
+        }
+        // Need a way to get the type from typeNode (getter method?)
+        // Checks if the expression matches the type provided
+        if (type.equals(ReturnType.Integer) && !expr.validateTree().equals(ReturnType.Integer)) {
+            throw new Exception(String.format("Semantic Error\nType does not match assignment"));
+        }
+        else if (type.equals(ReturnType.Double) && !expr.validateTree().equals(ReturnType.Double)) {
+            throw new Exception(String.format("Semantic Error\nType does not match assignment"));
+        }
+        else if (type.equals(ReturnType.String) && !expr.validateTree().equals(ReturnType.String)) {
+            throw new Exception(String.format("Semantic Error\nType does not match assignment"));
+        }
+        else if (type.equals(ReturnType.Boolean) && !expr.validateTree().equals(ReturnType.Boolean)) {
+            throw new Exception(String.format("Semantic Error\nType does not match assignment"));
+        }
+
+        return null;
     }
 }

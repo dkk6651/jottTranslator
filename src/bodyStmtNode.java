@@ -27,7 +27,8 @@ public abstract class bodyStmtNode {
             }
             tokens.remove(0);
             return node;
-        } else if (token.getTokenType() == TokenType.ID_KEYWORD) {
+        }
+        else if (token.getTokenType() == TokenType.ID_KEYWORD) {
             if(token.getToken().equals("Double") || token.getToken().equals("Integer") || token.getToken().equals("String") || token.getToken().equals("Boolean")){
                 // Look 2 tokens ahead
                 if (tokens.get(2).getTokenType() == TokenType.SEMICOLON) {
@@ -42,5 +43,9 @@ public abstract class bodyStmtNode {
         } else {
             throw new Exception(); //@Todo error handling
         }
+    }
+
+    public ReturnType validateTree() throws Exception {
+        return null;
     }
 }

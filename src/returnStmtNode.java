@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 public class returnStmtNode implements JottTree {
-    private JottTree expr = null;
+    private JottTree expr;
 
     public returnStmtNode(JottTree expr) {
         this.expr = expr;
@@ -25,7 +25,7 @@ public class returnStmtNode implements JottTree {
         tokens.remove(0);
 
         // parse for expression
-        JottTree r_expr = exprNode.parse(tokens);
+        JottTree r_expr = exprNode. parse(tokens);
         token = tokens.get(0);
 
         // check for semicolon
@@ -68,7 +68,8 @@ public class returnStmtNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        // Returns the ReturnType of the expression for the function def to validate
+        return expr.validateTree();
     }
 }

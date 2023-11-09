@@ -63,9 +63,14 @@ public class bodyNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+    public ReturnType validateTree() throws Exception {
+        for (JottTree body : body_stmt) {
+            body.validateTree();
+        }
+
+        return_stmt.validateTree();
+
+        return null;
     }
     
 }
