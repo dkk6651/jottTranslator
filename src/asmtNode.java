@@ -93,7 +93,9 @@ public class asmtNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        if (type == null) {
+
+        // Check if this is also a variable declaration
+        if (type != null) {
 
             // Checks whether this id exists already & return its type
             if (id.validateTree() != null) {
