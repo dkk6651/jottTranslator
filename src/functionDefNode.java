@@ -80,10 +80,14 @@ public class functionDefNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() { 
-        returnType = this.returnNode.typeReturn
-        SymbolTable.addFunc(this.funcName, returnType)
-        for param in this.params:
-            SymbolTable.addParamToFunc(this.funcName, param.id, returnType)
+    public ReturnType validateTree() throws Exception { 
+        ReturnType returnType = returnNode.validateTree();
+        funcName.validateTree();
+        String name = funcName.convertToJott();
+        SymbolTable.symTable.addFunc(name, returnType);
+        SymbolTable.symTable.enterScope(name);
+        params.validateTree();
+        SymbolTable.symTable.exitScope();
+        return returnType;
     }
 }
