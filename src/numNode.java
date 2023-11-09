@@ -46,22 +46,22 @@ public class numNode extends exprNode {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        if(isDouble(this.token.getToken())){
-            return ReturnType.Double;
-        }
         if(isInteger(this.token.getToken())){
             return ReturnType.Integer;
+        }
+        if(isDouble(this.token.getToken())){
+            return ReturnType.Double;
         }
         throw new Exception();
     }
 
     public static boolean isDouble(String str) {
         try {
-            double v = Double.parseDouble(str);
+            Double.parseDouble(str);
             return true;
         } catch (NumberFormatException ignored) {
+            return false;
         }
-        return false;
     }
 
     public static boolean isInteger(String str) {
