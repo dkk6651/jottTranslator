@@ -45,7 +45,18 @@ public class programNode implements JottTree {
     }
 
     @Override
-    public ReturnType validateTree() {
+    public ReturnType validateTree() throws Exception {
+        //check that main function exists and has no params
+        if (SymbolTable.symTable.checkFunc("main")) {
+            SymbolTable.symTable.enterScope("main");
+            if(SymbolTable.scope.size()!=1){
+                throw new Exception("\"main\" function may not take any arguments");
+            }
+            SymbolTable.symTable.exitScope();
+        } else {
+            throw new Exception("\"main\" function is not defined");
+        }
+
         return null;
     }
 }
