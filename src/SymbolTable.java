@@ -88,10 +88,14 @@ public class SymbolTable {
     }
 
     public Boolean paramInScope(String param){
-        return functions.get(scope).containsKey(param);
+        return scope.containsKey(param);
     }
 
     public Boolean paramInScopeMatchType(String param, ReturnType type){
-        return functions.get(scope).get(param) == type;
+        return scope.get(param) == type;
+    }
+
+    public ReturnType getFuncReturn(String funcName){
+        return functions.get(funcName).get("return");
     }
 }

@@ -68,6 +68,6 @@ public class funcCallNode implements JottTree {
 
     @Override
     public ReturnType validateTree() {
-        return null;
+        return SymbolTable.symTable.getFuncReturn(this.id.convertToJott());
     }
 }

@@ -40,7 +40,12 @@ public class opNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() {
+        if(token.getTokenType() == TokenType.MATH_OP){
+            return ReturnType.MathOP;
+        }
+        else{
+            return ReturnType.RelOP;
+        }
     }
 }

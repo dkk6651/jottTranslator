@@ -24,15 +24,6 @@ public class numNode extends exprNode {
         return new numNode(tokens.remove(0));
     }
 
-    public static boolean isDouble(String v){
-        try {
-            double a = Double.parseDouble(v);
-            return true;
-        }
-        catch(NumberFormatException ignored){}
-        return false;
-    }
-
     @Override
     public String convertToJott() {
         return this.token.getToken();
@@ -54,7 +45,31 @@ public class numNode extends exprNode {
     }
 
     @Override
-    public ReturnType validateTree() {
-        return null;
+    public ReturnType validateTree() throws Exception {
+        if(isDouble(this.token.getToken())){
+            return ReturnType.Double;
+        }
+        if(isInteger(this.token.getToken())){
+            return ReturnType.Integer;
+        }
+        throw new Exception();
+    }
+
+    public static boolean isDouble(String str) {
+        try {
+            double v = Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException ignored) {
+        }
+        return false;
+    }
+
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

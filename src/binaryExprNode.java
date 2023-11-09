@@ -4,8 +4,6 @@
  * @author: Daniel Kim
  */
 
-import java.util.ArrayList;
-
 public class binaryExprNode extends exprNode{
     JottTree left;
     JottTree op;
@@ -38,7 +36,20 @@ public class binaryExprNode extends exprNode{
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() throws Exception {
+        ReturnType leftType = left.validateTree();
+        ReturnType rightType = right.validateTree();
+        ReturnType opType = op.validateTree();
+        if(leftType != rightType || leftType == ReturnType.Void){
+            throw new Exception();
+        }
+        else{
+            if(opType == ReturnType.RelOP){
+                return ReturnType.Boolean;
+            }
+            else{
+                return leftType;
+            }
+        }
     }
 }

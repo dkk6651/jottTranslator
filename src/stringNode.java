@@ -36,7 +36,7 @@ public class stringNode extends exprNode{
     }
 
     @Override
-    public boolean validateTree() {
-        return false;
+    public ReturnType validateTree() {
+        return ReturnType.String;
     }
 }

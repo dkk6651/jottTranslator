@@ -3,5 +3,7 @@ public enum ReturnType {
     Integer,
     String,
     Boolean,
-    Void
+    Void,
+    RelOP,
+    MathOP
 }
