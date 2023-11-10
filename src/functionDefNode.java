@@ -36,7 +36,9 @@ public class functionDefNode implements JottTree {
             }else{
                 throw new Exception("Syntax Error: expected ':' as next token");
             }
-
+            if(SymbolTable.symTable.checkFunc(node.funcName.convertToJott())){
+                throw new Exception(String.format("Semantic Error:\nFunction %s already defined\n%s:%d", node.funcName.convertToJott(), token.getFilename(), token.getLineNum()));
+            }
             SymbolTable.symTable.addFunc(node.funcName.convertToJott(), node.returnNode.validateTree());
             if(node.params != null){
                 node.params.validateTree();
@@ -90,10 +92,6 @@ public class functionDefNode implements JottTree {
     public ReturnType validateTree() throws Exception { 
         ReturnType returnType = returnNode.validateTree();
         String name = funcName.convertToJott();
-        if(SymbolTable.symTable.checkFunc(name)){
-            throw new Exception("Semantic Error:\nFunction has already been defined");
-        }
-        SymbolTable.symTable.addFunc(name, returnType);
         SymbolTable.symTable.enterScope(name);
         if(params != null){
             params.validateTree();
