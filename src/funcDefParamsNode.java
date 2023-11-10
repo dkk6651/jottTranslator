@@ -42,6 +42,7 @@ public class funcDefParamsNode implements JottTree {
 
         while (!params.isEmpty()) {
             string.append(params.get(0).convertToJott());
+            params.remove(0);
         }
     
         return string.toString();

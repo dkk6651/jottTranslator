@@ -92,11 +92,26 @@ public class functionDefNode implements JottTree {
         // So far only works if there is one parameter in a function
         if (params != null) {
             String p = params.convertToJott();
-            int index = p.indexOf(':');
-            String p_name = p.substring(0, index);
-            String p_returnTypeString = p.substring(index + 1);
-            ReturnType p_returnType = convertStringToReturnType(p_returnTypeString);
-            SymbolTable.symTable.addParamToFunc(name, p_name, p_returnType);
+            while (!p.equals("")) {
+                int index1 = p.indexOf(':');
+                int index2 = p.indexOf(',');
+                String p_name = p.substring(0, index1);
+                String p_returnTypeString;
+                if (index2 != -1) {
+                    p_returnTypeString = p.substring(index1 + 1, index2);
+                }
+                else {
+                    p_returnTypeString = p.substring(index1 + 1);
+                }
+                ReturnType p_returnType = convertStringToReturnType(p_returnTypeString);
+                SymbolTable.symTable.addParamToFunc(name, p_name, p_returnType);
+                if (index2 != -1) {
+                    p = p.substring(index2 + 1);
+                }
+                else {
+                    p = "";
+                }
+            }
         }
         SymbolTable.symTable.enterScope(name);
         if (params != null) {
