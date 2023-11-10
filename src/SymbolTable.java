@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -105,7 +103,11 @@ public class SymbolTable {
         return functions.get(funcName).get("return");
     }
 
-    public ReturnType getFuncParams(String funcName, String param) {
+    public LinkedHashMap<String, ReturnType> getFuncParams(String funcName) {
+        return functions.get(funcName);
+    }
+
+    public ReturnType getFuncParamReturn(String funcName, String param) {
         return functions.get(funcName).get(param);
     }
 }

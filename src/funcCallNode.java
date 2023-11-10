@@ -5,6 +5,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class funcCallNode implements JottTree {
     private JottTree fcHeader;
@@ -29,7 +30,6 @@ public class funcCallNode implements JottTree {
             if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
                 tokens.remove(0);
                 node.params = paramsNode.parse(tokens);
-                System.out.println(node.params.convertToJott());
                 ReturnType returnType = ReturnType.Void;
                 if (isInteger(node.params.convertToJott())) {
                     returnType = ReturnType.Integer;
@@ -37,9 +37,14 @@ public class funcCallNode implements JottTree {
                 else if (isDouble(node.params.convertToJott())) {
                     returnType = ReturnType.Double;
                 }
-                System.out.println(node.id.convertToJott());
-                //System.out.println(SymbolTable.symTable.getFuncParams(node.id.convertToJott(), ));
-                //SymbolTable.symTable.checkParamFunc(node.id.convertToJott(), , returnType);
+                Set<String> keys = SymbolTable.symTable.getFuncParams(node.id.convertToJott()).keySet();
+                for (String key : keys) {
+                    if (!key.equals("return")) {
+                        if (!SymbolTable.symTable.checkParamFunc(node.id.convertToJott(), key, returnType)) {
+                            throw new Exception(String.format("Semantic Error\nMethod cannot be applied to the given types\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
+                        }
+                    }
+                }
                 if(tokens.get(0).getTokenType() == TokenType.R_BRACKET){
                     tokens.remove(0);
                     return node;
