@@ -28,6 +28,7 @@ public class jottTranslator {
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(output));
             bw.append(temp);
+            bw.flush();
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();

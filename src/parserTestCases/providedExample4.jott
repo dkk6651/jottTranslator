@@ -3,5 +3,5 @@ def foo[]:Void{
     Integer x =;
     ::print[5];
     #this is a comment
-    ::print[ "foo bar" ]
+    ::print[ "foo bar" ];
 }

@@ -4,5 +4,5 @@ def foo[]:Void{
     Double y = 3.2 + x;
     ::print[5];
     #this is a comment
-    ::print[ "foo bar" ]
+    ::print[ "foo bar" ];
 }

@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -5,6 +7,10 @@ public class SymbolTable {
     HashMap<String, LinkedHashMap<String, ReturnType>> functions = new HashMap<>();
     public static SymbolTable symTable = new SymbolTable();
     public static LinkedHashMap<String, ReturnType> scope;
+
+    private SymbolTable() {
+        addFunc("print", ReturnType.Void);
+    }
 
     /**
      * Adds function to the symbol table
@@ -29,7 +35,7 @@ public class SymbolTable {
      * @return True if successful else False
      */
     public Boolean addParamToFunc(String funcName, String paramName, ReturnType type){
-        if(functions.containsKey(funcName)){
+        if(!functions.containsKey(funcName)){
             return false;
         }
         if(functions.get(funcName).containsKey(paramName)){
@@ -97,5 +103,9 @@ public class SymbolTable {
 
     public ReturnType getFuncReturn(String funcName){
         return functions.get(funcName).get("return");
+    }
+
+    public ReturnType getFuncParams(String funcName, String param) {
+        return functions.get(funcName).get(param);
     }
 }

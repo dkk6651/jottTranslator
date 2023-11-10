@@ -2,5 +2,5 @@
 def 123foo[]:Integer{
     ::print[5];
     #this is a comment
-    ::print[ "foo bar" ]
+    ::print[ "foo bar" ];
 }

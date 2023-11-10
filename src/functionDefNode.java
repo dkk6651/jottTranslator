@@ -39,6 +39,7 @@ public class functionDefNode implements JottTree {
             
             if (tokens.get(0).getToken().equals("{")){
                 tokens.remove(0);
+                node.validateTree();
                 node.body = bodyNode.parse(tokens);
                 if(!tokens.get(0).getToken().equals("}")){
                     throw new Exception("Syntax Error: expected '}' as next token");
@@ -50,6 +51,7 @@ public class functionDefNode implements JottTree {
         }else{
             throw new Exception("Syntax Error: expected 'def' as next token");
         }
+        SymbolTable.symTable.exitScope();
         return node;
     }
     @Override
@@ -80,14 +82,38 @@ public class functionDefNode implements JottTree {
     }
 
     @Override
-    public ReturnType validateTree() throws Exception { 
-        ReturnType returnType = returnNode.validateTree();
+    public ReturnType validateTree() throws Exception {
+        String returnTypeString = returnNode.convertToJott();
+        ReturnType returnType = convertStringToReturnType(returnTypeString);
         funcName.validateTree();
         String name = funcName.convertToJott();
         SymbolTable.symTable.addFunc(name, returnType);
+
+        // So far only works if there is one parameter in a function
+        if (params != null) {
+            String p = params.convertToJott();
+            int index = p.indexOf(':');
+            String p_name = p.substring(0, index);
+            String p_returnTypeString = p.substring(index + 1);
+            ReturnType p_returnType = convertStringToReturnType(p_returnTypeString);
+            SymbolTable.symTable.addParamToFunc(name, p_name, p_returnType);
+        }
         SymbolTable.symTable.enterScope(name);
-        params.validateTree();
+        if (params != null) {
+            params.validateTree();
+        }
         SymbolTable.symTable.exitScope();
         return returnType;
+    }
+
+    private ReturnType convertStringToReturnType(String p_returnTypeString) throws Exception {
+        return switch (p_returnTypeString) {
+            case "Integer" -> ReturnType.Integer;
+            case "Double" -> ReturnType.Double;
+            case "String" -> ReturnType.String;
+            case "Boolean" -> ReturnType.Boolean;
+            case "Void" -> ReturnType.Void;
+            default -> throw new Exception("Semantic Error\nReturn type is not valid");
+        };
     }
 }

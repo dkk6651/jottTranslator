@@ -22,13 +22,24 @@ public class funcCallNode implements JottTree {
             if(tokens.get(0).getTokenType() != TokenType.ID_KEYWORD){
                 throw new Exception(String.format("Syntax Error\nToken is not an ID\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
             }
-            if(SymbolTable.symTable.checkFunc(tokens.get(0).getToken())){
+            if(!SymbolTable.symTable.checkFunc(tokens.get(0).getToken())){
                 throw new Exception(String.format("Semantic Error\nFunction is not defined\n%s:%d", tokens.get(0).getFilename(), tokens.get(0).getLineNum()));
             }
             node.id = idNode.parse(tokens);
             if(tokens.get(0).getTokenType() == TokenType.L_BRACKET){
                 tokens.remove(0);
                 node.params = paramsNode.parse(tokens);
+                System.out.println(node.params.convertToJott());
+                ReturnType returnType = ReturnType.Void;
+                if (isInteger(node.params.convertToJott())) {
+                    returnType = ReturnType.Integer;
+                }
+                else if (isDouble(node.params.convertToJott())) {
+                    returnType = ReturnType.Double;
+                }
+                System.out.println(node.id.convertToJott());
+                //System.out.println(SymbolTable.symTable.getFuncParams(node.id.convertToJott(), ));
+                //SymbolTable.symTable.checkParamFunc(node.id.convertToJott(), , returnType);
                 if(tokens.get(0).getTokenType() == TokenType.R_BRACKET){
                     tokens.remove(0);
                     return node;
@@ -69,5 +80,23 @@ public class funcCallNode implements JottTree {
     @Override
     public ReturnType validateTree() {
         return SymbolTable.symTable.getFuncReturn(this.id.convertToJott());
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
