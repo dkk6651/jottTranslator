@@ -70,10 +70,23 @@ public class paramsNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        LinkedHashMap<String, ReturnType> scope = SymbolTable.scope;
+        LinkedHashMap<String, ReturnType> scope = new LinkedHashMap<>(SymbolTable.scope);
+
+        if(SymbolTable.printFlag){
+            if(expressionNode.validateTree() == ReturnType.Void){
+                throw new Exception("Semantic Error:\nFunction \"Print\" cannot take in Void parameter");
+            }
+            else if(!expressions.isEmpty()){
+                throw new Exception("Semantic Error:\nFunction \"Print\" cannot take more than one parameter");
+            }
+            else{
+                SymbolTable.printFlag = false;
+                return null;
+            }
+        }
 
         //function has no params, func call was given no params
-        if (expressionNode == null && scope.size() == 0) {
+        if (expressionNode == null && scope.isEmpty()) {
             return null; //valid
         }
 

@@ -1,10 +1,14 @@
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class SymbolTable {
     HashMap<String, LinkedHashMap<String, ReturnType>> functions = new HashMap<>();
     public static SymbolTable symTable = new SymbolTable();
+    public static ArrayList<LinkedHashMap<String, ReturnType>> scopeList = new ArrayList<>();
     public static LinkedHashMap<String, ReturnType> scope;
+    public static Boolean printFlag = false;
 
     /**
      * Adds function to the symbol table
@@ -81,10 +85,12 @@ public class SymbolTable {
 
     public void enterScope(String funcName){
         scope = new LinkedHashMap<String, ReturnType>(functions.get(funcName));
+        scopeList.add(functions.get(funcName));
     }
 
     public void exitScope(){
         scope.clear();
+        scope = scopeList.remove(scopeList.size() - 1);
     }
 
     public Boolean paramInScope(String param){
@@ -97,5 +103,9 @@ public class SymbolTable {
 
     public ReturnType getFuncReturn(String funcName){
         return functions.get(funcName).get("return");
+    }
+
+    public LinkedHashMap<String, ReturnType> getFuncTable(String funcName){
+        return functions.get(funcName);
     }
 }

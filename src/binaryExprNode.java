@@ -41,7 +41,7 @@ public class binaryExprNode extends exprNode{
         ReturnType rightType = right.validateTree();
         ReturnType opType = op.validateTree();
         if(leftType != rightType || leftType == ReturnType.Void){
-            throw new Exception();
+            throw new Exception("Semantic Error:\nExpression types do not match.");
         }
         else{
             if(opType == ReturnType.RelOP){

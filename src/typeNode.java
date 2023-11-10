@@ -48,6 +48,20 @@ public class typeNode implements JottTree {
 
     @Override
     public ReturnType validateTree() {
+        switch (token.getToken()) {
+            case "Double" -> {
+                return ReturnType.Double;
+            }
+            case "Integer" -> {
+                return ReturnType.Integer;
+            }
+            case "Boolean" -> {
+                return ReturnType.Boolean;
+            }
+            case "String" -> {
+                return ReturnType.String;
+            }
+        }
         return null;
     }
 }

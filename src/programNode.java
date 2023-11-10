@@ -12,10 +12,19 @@ public class programNode implements JottTree {
     public static JottTree parse(ArrayList<Token> tokens) throws Exception {
         programNode pNode = new programNode();
         pNode.functionDefNodes = new ArrayList<>();
+        SymbolTable.symTable.addFunc("length", ReturnType.Integer);
+        SymbolTable.symTable.addParamToFunc("length", "input", ReturnType.String);
+
+        SymbolTable.symTable.addFunc("concat", ReturnType.String);
+        SymbolTable.symTable.addParamToFunc("concat", "input1", ReturnType.String);
+        SymbolTable.symTable.addParamToFunc("concat", "input2", ReturnType.String);
+
+        SymbolTable.symTable.addFunc("print", ReturnType.Void);
 
         while (!tokens.isEmpty()) {
             pNode.functionDefNodes.add(functionDefNode.parse(tokens));
         }
+        pNode.validateTree();
         return pNode;
     }
 
@@ -51,6 +60,9 @@ public class programNode implements JottTree {
             SymbolTable.symTable.enterScope("main");
             if(SymbolTable.scope.size()!=1){
                 throw new Exception("\"main\" function may not take any arguments");
+            }
+            if(SymbolTable.scope.get("return") != ReturnType.Void){
+                throw new Exception("\"main\" function must return nothing");
             }
             SymbolTable.symTable.exitScope();
         } else {

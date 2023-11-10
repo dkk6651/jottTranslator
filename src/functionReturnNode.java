@@ -48,6 +48,9 @@ public class functionReturnNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
+        if(typeReturn == null){
+            return ReturnType.Void;
+        }
         return typeReturn.validateTree();
     }
 }

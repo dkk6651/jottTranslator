@@ -39,6 +39,6 @@ public class idNode extends exprNode{
 
     @Override
     public ReturnType validateTree() {
-        return null;
+        return SymbolTable.scope.get(this.token.getToken());
     }
 }

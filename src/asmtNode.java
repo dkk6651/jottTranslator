@@ -53,10 +53,14 @@ public class asmtNode implements JottTree {
         tokens.remove(0);
 
         if (a) {
-            return new asmtNode(a_type, a_id, a_expr);
+            asmtNode node = new asmtNode(a_type, a_id, a_expr);
+            node.validateTree();
+            return node;
         }
         else {
-            return new asmtNode(a_id, a_expr);
+            asmtNode node = new asmtNode(a_id, a_expr);
+            node.validateTree();
+            return node;
         }
     }
 
@@ -93,32 +97,19 @@ public class asmtNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-
+        System.out.println(SymbolTable.scope);
         // Check if this is also a variable declaration
         if (type != null) {
-
             // Checks whether this id exists already & return its type
-            if (id.validateTree() != null) {
+            if(SymbolTable.symTable.paramInScope(id.convertToJott())){
                 throw new Exception(String.format("Semantic Error\nThe id '%s' is already in use", id));
             }
+            SymbolTable.scope.put(id.convertToJott(), type.validateTree());
         }
 
         // Checks if the expression matches the type provided
-        if (SymbolTable.symTable.paramInScopeMatchType(id.convertToJott(), ReturnType.Integer)
-                && !expr.validateTree().equals(ReturnType.Integer)) {
-            throw new Exception("Semantic Error\nType does not match assignment");
-        }
-        else if (SymbolTable.symTable.paramInScopeMatchType(id.convertToJott(), ReturnType.Double)
-                && !expr.validateTree().equals(ReturnType.Double)) {
-            throw new Exception("Semantic Error\nType does not match assignment");
-        }
-        else if (SymbolTable.symTable.paramInScopeMatchType(id.convertToJott(), ReturnType.String)
-                && !expr.validateTree().equals(ReturnType.String)) {
-            throw new Exception("Semantic Error\nType does not match assignment");
-        }
-        else if (SymbolTable.symTable.paramInScopeMatchType(id.convertToJott(), ReturnType.Boolean)
-                && !expr.validateTree().equals(ReturnType.Boolean)) {
-            throw new Exception("Semantic Error\nType does not match assignment");
+        if(!SymbolTable.symTable.paramInScopeMatchType(id.convertToJott(), expr.validateTree())){
+            throw new Exception(String.format("Semantic Error:\nExpression result does not match variable type %s", id.convertToJott()));
         }
 
         return null;

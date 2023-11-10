@@ -44,8 +44,4 @@ public abstract class bodyStmtNode {
             throw new Exception(); //@Todo error handling
         }
     }
-
-    public ReturnType validateTree() throws Exception {
-        return null;
-    }
 }
