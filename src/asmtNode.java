@@ -97,7 +97,6 @@ public class asmtNode implements JottTree {
 
     @Override
     public ReturnType validateTree() throws Exception {
-        System.out.println(SymbolTable.scope);
         // Check if this is also a variable declaration
         if (type != null) {
             // Checks whether this id exists already & return its type

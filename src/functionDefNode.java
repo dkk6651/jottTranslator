@@ -44,6 +44,7 @@ public class functionDefNode implements JottTree {
 
             if (tokens.get(0).getToken().equals("{")){
                 tokens.remove(0);
+                node.validateTree();
                 SymbolTable.symTable.enterScope(node.funcName.convertToJott());
                 node.body = bodyNode.parse(tokens);
                 if(!tokens.get(0).getToken().equals("}")){
@@ -56,7 +57,7 @@ public class functionDefNode implements JottTree {
         }else{
             throw new Exception("Syntax Error: expected 'def' as next token");
         }
-        node.validateTree();
+        SymbolTable.symTable.exitScope();
         return node;
     }
     @Override

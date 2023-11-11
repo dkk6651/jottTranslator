@@ -85,12 +85,16 @@ public class SymbolTable {
 
     public void enterScope(String funcName){
         scope = new LinkedHashMap<String, ReturnType>(functions.get(funcName));
-        scopeList.add(functions.get(funcName));
+        scopeList.add(scope);
     }
 
     public void exitScope(){
-        scope.clear();
-        scope = scopeList.remove(scopeList.size() - 1);
+        scopeList.remove(scopeList.size()-1);
+        if(!scopeList.isEmpty()){
+            scope = scopeList.get(scopeList.size()-1);
+        } else{
+            scope.clear();
+        }
     }
 
     public Boolean paramInScope(String param){

@@ -33,6 +33,7 @@ public class funcCallNode implements JottTree {
                 if(funcName.equals("print")) SymbolTable.printFlag = true;
                 node.params = paramsNode.parse(tokens);
                 node.params.validateTree();
+                SymbolTable.symTable.exitScope();
                 if(tokens.get(0).getTokenType() == TokenType.R_BRACKET){
                     tokens.remove(0);
                     return node;
