@@ -90,29 +90,33 @@ public class paramsNode implements JottTree {
             return null; //valid
         }
 
+        int size = 0;
+        if(expressionNode != null) size += 1;
         //assume that the parent func call node entered the scope of the target function when validating
         //check length
-        if (expressions.size() + 1 != scope.size() - 1) { //plus one because the root expr node isn't in the list
+        if (expressions.size() + size != scope.size() - 1) { //plus one because the root expr node isn't in the list
             throw new Exception(String.format("Wrong number of arguments for function (expected %d, got %d)",
                     scope.size(), expressions.size()));
         }
 
-        ArrayList<ReturnType> functionParams = new ArrayList<>(scope.values());
-        //ignore index 0, which is the function return type
+        if(expressionNode != null){
+            ArrayList<ReturnType> functionParams = new ArrayList<>(scope.values());
+            //ignore index 0, which is the function return type
 
-        ReturnType firstExpressionType = expressionNode.validateTree(); //check the type of the first param
-        checkExpressionTypes(firstExpressionType, functionParams.get(1)); 
+            ReturnType firstExpressionType = expressionNode.validateTree(); //check the type of the first param
+            checkExpressionTypes(firstExpressionType, functionParams.get(1));
 
-        //type checking
-        for (int i = 0; i < expressions.size(); i++) {
+            //type checking
+            for (int i = 0; i < expressions.size(); i++) {
 
-            paramsTNode expr = (paramsTNode) expressions.get(i);
-            ReturnType expressionType = expr.validateTree();
+                paramsTNode expr = (paramsTNode) expressions.get(i);
+                ReturnType expressionType = expr.validateTree();
 
-            int targetIndex = i + 2;
-            ReturnType funcParamType = functionParams.get(targetIndex); //skip first and second entries (the return value and first param)
+                int targetIndex = i + 2;
+                ReturnType funcParamType = functionParams.get(targetIndex); //skip first and second entries (the return value and first param)
 
-            checkExpressionTypes(expressionType, funcParamType);
+                checkExpressionTypes(expressionType, funcParamType);
+            }
         }
 
         //valid

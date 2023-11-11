@@ -11,7 +11,7 @@ import java.io.IOException;
 public class jottTranslator {
     public static void main(String[] args){
         assert args.length == 3;
-        String input = "phase3testcases/funcCallParamInvalid.jott";
+        String input = "phase3testcases/largerValid.jott";
         String output = "test1.jott";
         String language = "jott";
         String temp = "";
