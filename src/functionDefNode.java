@@ -47,6 +47,7 @@ public class functionDefNode implements JottTree {
                 node.validateTree();
                 SymbolTable.symTable.enterScope(node.funcName.convertToJott());
                 node.body = bodyNode.parse(tokens);
+                SymbolTable.voidFlag = false;
                 if(!tokens.get(0).getToken().equals("}")){
                     throw new Exception("Syntax Error: expected '}' as next token");
                 }
