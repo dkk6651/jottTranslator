@@ -2,13 +2,13 @@ Tokenizer:
 
 Given that there is no "main" function, users would simply need to build the
 project and utilize the "tokenize(filename)" function. Alternatively, users
-could include a main function within the "JottTokenizer.java" file and
+could include a main function within the "provided.JottTokenizer.java" file and
 call the "tokenize" function from there.
 
 Parser:
 
 Given that there is no "main" function, users would simply need to build the
 project and utilize the "parse(tokens" function. Alternatively, users could
-include a main function within the "JottParser.java" file and call the "parse"
+include a main function within the "provided.JottParser.java" file and call the "parse"
 function from there. This function must be called on a tokenized ArrayList
-of Token type.
+of provided.Token type.

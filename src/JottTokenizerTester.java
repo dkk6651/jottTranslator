@@ -9,6 +9,10 @@
  * @author Scott C Johnson (scj@cs.rit.edu)
  */
 
+import provided.JottTokenizer;
+import provided.Token;
+import provided.TokenType;
+
 import java.util.ArrayList;
 
 public class JottTokenizerTester {
@@ -137,7 +141,7 @@ public class JottTokenizerTester {
     }
 
     private String tokenToString(Token t){
-        return String.format("Token %s %s %s:%d", t.getToken(), t.getTokenType().toString(),
+        return String.format("provided.Token %s %s %s:%d", t.getToken(), t.getTokenType().toString(),
                                                   t.getFilename(), t.getLineNum());
     }
 

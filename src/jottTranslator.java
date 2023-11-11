@@ -1,3 +1,7 @@
+import provided.JottParser;
+import provided.JottTokenizer;
+import provided.JottTree;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,9 +15,9 @@ import java.io.IOException;
 public class jottTranslator {
     public static void main(String[] args){
         assert args.length == 3;
-        String input = "phase3testcases/largerValid.jott";
-        String output = "test1.jott";
-        String language = "jott";
+        String input = args[0];
+        String output = args[1];
+        String language = args[2];
         String temp = "";
 
         JottTree tree = JottParser.parse(JottTokenizer.tokenize(input));
