@@ -1,14 +1,9 @@
-Tokenizer:
+jottTranslator contains the program's main function. It accepts three arguments: the input Jott file, the output
+file for the translated code, and the language of desired translation.
 
-Given that there is no "main" function, users would simply need to build the
-project and utilize the "tokenize(filename)" function. Alternatively, users
-could include a main function within the "JottTokenizer.java" file and
-call the "tokenize" function from there.
-
-Parser:
-
-Given that there is no "main" function, users would simply need to build the
-project and utilize the "parse(tokens" function. Alternatively, users could
-include a main function within the "JottParser.java" file and call the "parse"
-function from there. This function must be called on a tokenized ArrayList
-of Token type.
+Usage: jottTranslator <input> <output> <language>
+You MUST specify all three arguments
+<input>     The Jott file to be translated
+<output>    The destination of the translation
+<language>  The desited language of translation
+            Can either be "Jott", "Java", "Python", or "C"
