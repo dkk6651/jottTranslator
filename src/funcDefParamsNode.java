@@ -65,7 +65,7 @@ public class funcDefParamsNode implements JottTree {
     @Override
     public ReturnType validateTree() throws Exception {
         if (id != null) {
-            SymbolTable.scope.put(id.convertToJott(), id.validateTree());
+            SymbolTable.scope.put(id.convertToJott(), type.validateTree());
         }
         for (JottTree param : params) {
             param.validateTree();

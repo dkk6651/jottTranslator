@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
 Author: JD Rears jar6256
@@ -40,9 +41,6 @@ public class functionDefNode implements JottTree {
                 throw new Exception(String.format("Semantic Error:\nFunction %s already defined\n%s:%d", node.funcName.convertToJott(), token.getFilename(), token.getLineNum()));
             }
             SymbolTable.symTable.addFunc(node.funcName.convertToJott(), node.returnNode.validateTree());
-            if(node.params != null){
-                node.params.validateTree();
-            }
 
             if (tokens.get(0).getToken().equals("{")){
                 tokens.remove(0);
@@ -96,6 +94,7 @@ public class functionDefNode implements JottTree {
         if(params != null){
             params.validateTree();
         }
+        SymbolTable.symTable.functions.replace(name, new LinkedHashMap<>(SymbolTable.scope));
         SymbolTable.symTable.exitScope();
         return returnType;
     }
