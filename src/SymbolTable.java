@@ -9,6 +9,7 @@ public class SymbolTable {
     public static ArrayList<LinkedHashMap<String, ReturnType>> scopeList = new ArrayList<>();
     public static LinkedHashMap<String, ReturnType> scope;
     public static Boolean printFlag = false;
+    public static Boolean voidFlag = false;
 
     /**
      * Adds function to the symbol table

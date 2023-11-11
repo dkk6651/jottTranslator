@@ -90,6 +90,7 @@ public class functionDefNode implements JottTree {
     @Override
     public ReturnType validateTree() throws Exception { 
         ReturnType returnType = returnNode.validateTree();
+        if (returnType == ReturnType.Void) SymbolTable.voidFlag = true;
         String name = funcName.convertToJott();
         SymbolTable.symTable.enterScope(name);
         if(params != null){

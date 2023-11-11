@@ -24,6 +24,9 @@ public class returnStmtNode implements JottTree {
         }
         tokens.remove(0);
 
+        if (!tokens.isEmpty() && SymbolTable.voidFlag)
+            throw new Exception("Semantic Error\nVoid function cannot return a value");
+
         // parse for expression
         JottTree r_expr = exprNode. parse(tokens);
         token = tokens.get(0);

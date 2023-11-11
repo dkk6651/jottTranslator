@@ -20,7 +20,10 @@ public class bodyNode implements JottTree {
         if(tokens.get(0).getTokenType() == TokenType.R_BRACE) return new bodyNode(bodyList, null);
         while(!tokens.get(0).getToken().equals("return")){
             bodyList.add(bodyStmtNode.parse(tokens));
-            if(tokens.get(0).getTokenType() == TokenType.R_BRACE) return new bodyNode(bodyList, null);
+            if(tokens.get(0).getTokenType() == TokenType.R_BRACE && SymbolTable.voidFlag)
+                return new bodyNode(bodyList, null);
+            else if (tokens.get(0).getTokenType() == TokenType.R_BRACE && !SymbolTable.voidFlag)
+                throw new Exception("Semantic Error\nExpected return for non-void function");
         }
 
         // parse for return statement
