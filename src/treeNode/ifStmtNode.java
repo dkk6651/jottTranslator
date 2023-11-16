@@ -92,16 +92,34 @@ public class ifStmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        String ifString = "if(" + condition.convertToJott() + "){" + body_node.convertToJava(className) + "}";
+        if(!elseifLst.isEmpty()){
+            for (JottTree jottTree : elseifLst) {
+                ifString = ifString.concat(jottTree.convertToJava(className));
+            }
+        }
+        if(hasElse!=null){
+            ifString = ifString.concat(hasElse.convertToJava(className));
+        }
+        return ifString;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String ifString = "if(" + condition.convertToC() + "){" + body_node.convertToC() + "}";
+        if(!elseifLst.isEmpty()){
+            for (JottTree jottTree : elseifLst) {
+                ifString = ifString.concat(jottTree.convertToC());
+            }
+        }
+        if(hasElse!=null){
+            ifString = ifString.concat(hasElse.convertToC());
+        }
+        return ifString;
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         return null;
     }
 
