@@ -49,7 +49,7 @@ public class returnStmtNode implements JottTree {
     public String convertToJott() {
         String output = "";
 
-        if (expr == null){
+        if (expr == null) {
             return output;
         }
 
@@ -62,17 +62,46 @@ public class returnStmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        String output = "";
+
+        if (expr == null) {
+            return output;
+        }
+
+        output += "return ";
+        output += expr.convertToJava(className);
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String output = "";
+
+        if (expr == null) {
+            return output;
+        }
+
+        output += "return ";
+        output += expr.convertToC();
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToPython() {
-        return null;
+        String output = "";
+
+        if (expr == null) {
+            return output;
+        }
+
+        output += "return ";
+        output += expr.convertToPython();
+
+        return output;
     }
 
     @Override

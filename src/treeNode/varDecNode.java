@@ -45,17 +45,25 @@ public class varDecNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        String output = type.convertToJava(className);
+        output += id.convertToJava(className);
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String output = type.convertToC();
+        output += id.convertToC();
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToPython() {
-        return null;
+        return "";
     }
 
     @Override

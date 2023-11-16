@@ -46,7 +46,7 @@ public class bodyNode implements JottTree {
         for (JottTree jottTree : this.body_stmt) {
             string.append(jottTree.convertToJott());
             if(jottTree.getClass() == funcCallNode.class){
-                string.append(";");
+                string.append(";\n");
             }
         }
         if(this.return_stmt != null){
@@ -57,20 +57,47 @@ public class bodyNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'convertToJava'");
+        StringBuilder string = new StringBuilder();
+        for (JottTree jottTree : this.body_stmt) {
+            string.append(jottTree.convertToJava(className));
+            if(jottTree.getClass() == funcCallNode.class){
+                string.append(";");
+            }
+        }
+        if(this.return_stmt != null){
+            string.append(this.return_stmt.convertToJava(className));
+        }
+        return string.toString();
     }
 
     @Override
     public String convertToC() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'convertToC'");
+        StringBuilder string = new StringBuilder();
+        for (JottTree jottTree : this.body_stmt) {
+            string.append(jottTree.convertToC());
+            if(jottTree.getClass() == funcCallNode.class){
+                string.append(";");
+            }
+        }
+        if(this.return_stmt != null){
+            string.append(this.return_stmt.convertToC());
+        }
+        return string.toString();
     }
 
     @Override
     public String convertToPython() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'convertToPython'");
+        StringBuilder string = new StringBuilder();
+        for (JottTree jottTree : this.body_stmt) {
+            string.append(jottTree.convertToPython());
+            if(jottTree.getClass() == funcCallNode.class){
+                string.append("\n\t");
+            }
+        }
+        if(this.return_stmt != null){
+            string.append(this.return_stmt.convertToPython());
+        }
+        return string.toString();
     }
 
     @Override
