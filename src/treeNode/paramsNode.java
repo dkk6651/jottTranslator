@@ -59,17 +59,42 @@ public class paramsNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        String build = "";
+        if (expressionNode != null) {
+            build += expressionNode.convertToJava(className);
+            for (JottTree arg : expressions) {
+                build += ", ";
+                build += arg.convertToJava(className);
+            }
+        }
+        return build;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String build = "";
+        if (expressionNode != null) {
+            build += expressionNode.convertToC();
+            for (JottTree arg : expressions) {
+                build += ", ";
+                build += arg.convertToC();
+            }
+        }
+        return build;
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        String build = new String(new char[depth]).replace("\0", "\t");
+        
+        if (expressionNode!=null){
+            build += expressionNode.convertToPython(depth);
+            for (JottTree arg : expressions) {
+                build += ", ";
+                build+= arg.convertToPython(depth);
+            }
+        }
+        return build;
     }
 
     @Override
