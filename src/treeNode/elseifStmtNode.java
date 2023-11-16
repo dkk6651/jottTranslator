@@ -72,12 +72,12 @@ public class elseifStmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return "else if(" + condition.convertToJava(className) + "){" + body_node.convertToJava(className) + "}";
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return "else if(" + condition.convertToC() + "){" + body_node.convertToC() + "}";
     }
 
     @Override
