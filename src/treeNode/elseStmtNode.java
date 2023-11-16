@@ -50,12 +50,12 @@ public class elseStmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return "else{" + body_node.convertToJava(className) + "}";
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return "else{" + body_node.convertToC() + "}";
     }
 
     @Override
