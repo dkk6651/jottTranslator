@@ -26,7 +26,7 @@ public class jottTranslator {
                 case "jott", "Jott" -> temp = tree.convertToJott();
                 case "C", "c" -> temp = tree.convertToC();
                 case "Java", "java" -> temp = tree.convertToJava(output.substring(0, output.length() - 5));
-                case "Python", "python" -> temp = tree.convertToPython();
+                case "Python", "python" -> temp = tree.convertToPython(0);
             }
 
             try{
