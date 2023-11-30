@@ -64,17 +64,17 @@ public class funcCallNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return className + "." + this.id.convertToJava(className) + "(" + this.params.convertToJava(className) + ")";
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return this.id.convertToC() + "(" + this.params.convertToC() + ")";
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        return this.id.convertToPython(depth) + "(" + this.params.convertToPython(depth) +")";
     }
 
     @Override

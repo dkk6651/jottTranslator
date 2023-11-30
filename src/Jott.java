@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author Daniel Kim
  */
 
-public class jottTranslator {
+public class Jott {
     public static void main(String[] args){
         assert args.length == 3;
         String input = args[0];
@@ -34,7 +34,7 @@ public class jottTranslator {
                 bw.append(temp);
                 bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }

@@ -36,7 +36,7 @@ public class binaryExprNode extends exprNode{
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         return null;
     }
 
