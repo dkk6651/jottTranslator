@@ -89,10 +89,10 @@ public class bodyNode implements JottTree {
     public String convertToPython(int depth) {
         StringBuilder string = new StringBuilder();
         for (JottTree jottTree : this.body_stmt) {
+            string.append("\t".repeat(Math.max(0, depth)));
             string.append(jottTree.convertToPython(depth + 1));
             if(jottTree.getClass() == funcCallNode.class){
                 string.append("\n");
-                string.append("\t".repeat(Math.max(0, depth)));
             }
         }
         if(this.return_stmt != null){
