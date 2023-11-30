@@ -185,9 +185,9 @@ public class JottTokenizer {
 		}
     	catch(FileNotFoundException e){
     		System.out.println("File not found");
-    		e.printStackTrace();
+    		// e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 		return result;
