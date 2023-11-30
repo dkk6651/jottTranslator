@@ -34,7 +34,7 @@ public class jottTranslator {
                 bw.append(temp);
                 bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
         }
     }
