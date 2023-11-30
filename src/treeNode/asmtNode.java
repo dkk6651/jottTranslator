@@ -87,17 +87,45 @@ public class asmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        String output = "";
+
+        if (type != null) {
+            output += type.convertToJava(className);
+        }
+
+        output += id.convertToJava(className);
+        output += " = ";
+        output += expr.convertToJava(className);
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String output = "";
+
+        if (type != null) {
+            output += type.convertToC();
+        }
+
+        output += id.convertToC();
+        output += " = ";
+        output += expr.convertToC();
+        output += ";";
+
+        return output;
     }
 
     @Override
     public String convertToPython(int depth) {
-        return null;
+        String output = "";
+
+        output += id.convertToPython(depth);
+        output += " = ";
+        output += expr.convertToPython(depth);
+
+        return output;
     }
 
     @Override
