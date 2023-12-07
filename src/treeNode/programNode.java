@@ -60,7 +60,7 @@ public class programNode implements JottTree {
         cOutput.append("#include <stdio.h>\n");
         cOutput.append("#include <string.h>\n");
         cOutput.append("#include <stdlib.h>\n");
-        cOutput.append("#include \"concat.h\"\n");
+        cOutput.append("#include \"stringHelper.h\"\n");
         for (JottTree funcDef : functionDefNodes) {
             cOutput.append(funcDef.convertToC());
             cOutput.append("\n");
