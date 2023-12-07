@@ -51,7 +51,7 @@ public class funcDefParamsTNode implements JottTree {
 
     @Override
     public String convertToC() {
-        return null;
+        return "," + this.type.convertToC() + this.id.convertToC();
     }
 
     @Override
