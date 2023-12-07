@@ -55,8 +55,8 @@ public class funcDefParamsTNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
-        return "," + this.id.convertToPython();
+    public String convertToPython(int depth) {
+        return "," + this.id.convertToPython(depth);
     }
 
     @Override

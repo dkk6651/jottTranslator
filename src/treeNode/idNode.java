@@ -27,17 +27,17 @@ public class idNode extends exprNode{
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return this.token.getToken();
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return this.token.getToken();
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        return this.token.getToken();
     }
 
     @Override

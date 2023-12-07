@@ -37,24 +37,45 @@ public class programNode implements JottTree {
         StringBuilder jottOutput = new StringBuilder();
         for (JottTree funcDef : functionDefNodes) {
             jottOutput.append(funcDef.convertToJott());
-            jottOutput.append(" ");
+            jottOutput.append("\n");
         }
         return jottOutput.toString();
     }
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        StringBuilder javaOutput = new StringBuilder();
+        javaOutput.append("public class ").append(className).append(" {");
+        for (JottTree funcDef : functionDefNodes) {
+            javaOutput.append(funcDef.convertToJava(className));
+            javaOutput.append("\n");
+        }
+        javaOutput.append("}");
+        return javaOutput.toString();
     }
 
     @Override
     public String convertToC() {
-        return null;
+        StringBuilder cOutput = new StringBuilder();
+        cOutput.append("#include <stdio.h>\n");
+        cOutput.append("#include <string.h>\n");
+        cOutput.append("#include <stdlib.h>\n");
+        cOutput.append("#include \"concat.h\"\n");
+        for (JottTree funcDef : functionDefNodes) {
+            cOutput.append(funcDef.convertToC());
+            cOutput.append("\n");
+        }
+        return cOutput.toString();
     }
 
     @Override
     public String convertToPython(int depth) {
-        return null;
+        StringBuilder pythonOutput = new StringBuilder();
+        for (JottTree funcDef : functionDefNodes) {
+            pythonOutput.append(funcDef.convertToPython(0));
+            pythonOutput.append("\n");
+        }
+        return pythonOutput.toString();
     }
 
     @Override

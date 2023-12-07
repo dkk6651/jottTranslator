@@ -78,11 +78,11 @@ public class funcDefParamsNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
-        StringBuilder string = new StringBuilder(this.id.convertToPython());
+    public String convertToPython(int depth) {
+        StringBuilder string = new StringBuilder(this.id.convertToPython(depth));
         while (!params.isEmpty()) {
             string.append(',');
-            string.append(params.get(0).convertToPython());
+            string.append(params.get(0).convertToPython(depth));
         }
         return string.toString();
     }
