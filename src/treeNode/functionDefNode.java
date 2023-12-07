@@ -82,9 +82,6 @@ public class functionDefNode implements JottTree {
                 + this.body.convertToJott() + "}";
     }
 
-    // ---------------
-    // TODO edit to account for depth
-
     @Override
     public String convertToJava(String className) {
         String params;
