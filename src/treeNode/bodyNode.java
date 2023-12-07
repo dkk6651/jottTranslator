@@ -46,7 +46,7 @@ public class bodyNode implements JottTree {
         for (JottTree jottTree : this.body_stmt) {
             string.append(jottTree.convertToJott());
             if(jottTree.getClass() == funcCallNode.class){
-                string.append(";\n");
+                string.append(";");
             }
         }
         if(this.return_stmt != null){
@@ -61,7 +61,7 @@ public class bodyNode implements JottTree {
         for (JottTree jottTree : this.body_stmt) {
             string.append(jottTree.convertToJava(className));
             if(jottTree.getClass() == funcCallNode.class){
-                string.append(";");
+                string.append(";\n");
             }
         }
         if(this.return_stmt != null){
@@ -76,7 +76,7 @@ public class bodyNode implements JottTree {
         for (JottTree jottTree : this.body_stmt) {
             string.append(jottTree.convertToC());
             if(jottTree.getClass() == funcCallNode.class){
-                string.append(";");
+                string.append(";\n");
             }
         }
         if(this.return_stmt != null){
@@ -86,16 +86,17 @@ public class bodyNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         StringBuilder string = new StringBuilder();
         for (JottTree jottTree : this.body_stmt) {
-            string.append(jottTree.convertToPython());
+            string.append("\t".repeat(Math.max(0, depth)));
+            string.append(jottTree.convertToPython(depth + 1));
             if(jottTree.getClass() == funcCallNode.class){
-                string.append("\n\t");
+                string.append("\n");
             }
         }
         if(this.return_stmt != null){
-            string.append(this.return_stmt.convertToPython());
+            string.append(this.return_stmt.convertToPython(depth + 1));
         }
         return string.toString();
     }

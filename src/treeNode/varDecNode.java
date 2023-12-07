@@ -62,8 +62,8 @@ public class varDecNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
-        return "";
+    public String convertToPython(int depth) {
+        return id.convertToPython(depth);
     }
 
     @Override

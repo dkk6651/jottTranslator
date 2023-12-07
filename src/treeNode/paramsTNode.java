@@ -32,17 +32,17 @@ public class paramsTNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return expression.convertToJava(className);
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return expression.convertToC();
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        return expression.convertToPython(depth);
     }
 
     @Override

@@ -49,7 +49,7 @@ public class returnStmtNode implements JottTree {
     public String convertToJott() {
         String output = "";
 
-        if (expr == null) {
+        if (expr == null){
             return output;
         }
 
@@ -91,7 +91,7 @@ public class returnStmtNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         String output = "";
 
         if (expr == null) {
@@ -99,7 +99,7 @@ public class returnStmtNode implements JottTree {
         }
 
         output += "return ";
-        output += expr.convertToPython();
+        output += expr.convertToPython(depth);
 
         return output;
     }

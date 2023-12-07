@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author Daniel Kim
  */
 
-public class jottTranslator {
+public class Jott {
     public static void main(String[] args){
         assert args.length == 3;
         String input = args[0];
@@ -26,7 +26,7 @@ public class jottTranslator {
                 case "jott", "Jott" -> temp = tree.convertToJott();
                 case "C", "c" -> temp = tree.convertToC();
                 case "Java", "java" -> temp = tree.convertToJava(output.substring(0, output.length() - 5));
-                case "Python", "python" -> temp = tree.convertToPython();
+                case "Python", "python" -> temp = tree.convertToPython(0);
             }
 
             try{
@@ -34,7 +34,7 @@ public class jottTranslator {
                 bw.append(temp);
                 bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }

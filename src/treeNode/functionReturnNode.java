@@ -40,16 +40,18 @@ public class functionReturnNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        if(this.typeReturn == null) return "void";
+        else return this.typeReturn.convertToJava(className);
     }
 
     @Override
     public String convertToC() {
-        return null;
+        if(this.typeReturn == null) return "void";
+        else return this.typeReturn.convertToC();
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         return null;
     }
 

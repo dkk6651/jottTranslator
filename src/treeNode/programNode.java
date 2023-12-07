@@ -53,7 +53,7 @@ public class programNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         return null;
     }
 

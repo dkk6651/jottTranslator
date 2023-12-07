@@ -118,12 +118,12 @@ public class asmtNode implements JottTree {
     }
 
     @Override
-    public String convertToPython() {
+    public String convertToPython(int depth) {
         String output = "";
 
-        output += id.convertToPython();
+        output += id.convertToPython(depth);
         output += " = ";
-        output += expr.convertToPython();
+        output += expr.convertToPython(depth);
 
         return output;
     }

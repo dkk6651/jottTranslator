@@ -50,17 +50,19 @@ public class elseStmtNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return "else{" + body_node.convertToJava(className) + "}";
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return "else{" + body_node.convertToC() + "}";
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        String build = new String(new char[depth]).replace("\0", "\t");
+        build += "else:\n" + body_node.convertToPython(depth+1);
+        return build;
     }
 
     @Override

@@ -27,17 +27,17 @@ public class binaryExprNode extends exprNode{
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        return this.left.convertToJava(className) + " " + this.op.convertToJava(className) + " " + this.right.convertToJava(className);
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return this.left.convertToC() + " " + this.op.convertToC() + " " + this.right.convertToC();
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        return this.left.convertToPython(depth) + " " + this.op.convertToPython(depth) + " " + this.right.convertToPython(depth);
     }
 
     @Override

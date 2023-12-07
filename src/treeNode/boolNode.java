@@ -24,17 +24,19 @@ public class boolNode extends exprNode {
 
     @Override
     public String convertToJava(String className) {
-        return null;
+        if(this.token.getToken().equals("True")) return "true";
+        else return "false";
     }
 
     @Override
     public String convertToC() {
-        return null;
+        if(this.token.getToken().equals("True")) return "true";
+        else return "false";
     }
 
     @Override
-    public String convertToPython() {
-        return null;
+    public String convertToPython(int depth) {
+        return this.token.getToken();
     }
 
     @Override
