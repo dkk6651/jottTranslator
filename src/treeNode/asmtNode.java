@@ -90,10 +90,10 @@ public class asmtNode implements JottTree {
         String output = "";
 
         if (type != null) {
-            output += type.convertToJava(className);
+            output += type.convertToJava(className) + " ";
         }
 
-        output += " " + id.convertToJava(className);
+        output += id.convertToJava(className);
         output += " = ";
         output += expr.convertToJava(className);
         output += ";\n";

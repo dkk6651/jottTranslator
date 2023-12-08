@@ -105,7 +105,7 @@ public class functionDefNode implements JottTree {
         if (this.params == null) {
             params = "";
         } else {
-            params = this.params.convertToJott();
+            params = this.params.convertToC();
         }
         return this.returnNode.convertToC() + this.funcName.convertToC() + "(" + params + "){\n"
                 + this.body.convertToC()
@@ -118,9 +118,12 @@ public class functionDefNode implements JottTree {
         if (this.params == null) {
             params = "";
         } else {
-            params = this.params.convertToJott();
+            params = this.params.convertToPython(depth);
         }
-        return "def " + this.funcName.convertToPython(depth) + "(" + params + "):\n" + this.body.convertToPython(depth);
+        if (this.funcName.convertToPython(depth).equals("main")) {
+            return "if __name__ == \"__main__\":\n" + this.body.convertToPython(depth + 1);
+        }
+        return "def " + this.funcName.convertToPython(depth) + "(" + params + "):\n" + this.body.convertToPython(depth + 1);
     }
 
     @Override

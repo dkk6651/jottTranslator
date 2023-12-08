@@ -120,7 +120,7 @@ public class ifStmtNode implements JottTree {
 
     @Override
     public String convertToPython(int depth) {
-        String build = new String(new char[depth]).replace("\0", "\t");
+        String build = "";
         build += "if " + condition.convertToPython(0) + ":\n" + body_node.convertToPython(depth+1);
         if(!elseifLst.isEmpty()){
             for (JottTree jottTree : elseifLst) {

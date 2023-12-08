@@ -85,7 +85,7 @@ public class paramsNode implements JottTree {
 
     @Override
     public String convertToPython(int depth) {
-        String build = new String(new char[depth]).replace("\0", "\t");
+        String build = "";
         
         if (expressionNode!=null){
             build += expressionNode.convertToPython(depth);
