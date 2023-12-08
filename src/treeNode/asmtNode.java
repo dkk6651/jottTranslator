@@ -93,10 +93,10 @@ public class asmtNode implements JottTree {
             output += type.convertToJava(className);
         }
 
-        output += id.convertToJava(className);
+        output += " " + id.convertToJava(className);
         output += " = ";
         output += expr.convertToJava(className);
-        output += ";";
+        output += ";\n";
 
         return output;
     }

@@ -70,7 +70,7 @@ public class returnStmtNode implements JottTree {
 
         output += "return ";
         output += expr.convertToJava(className);
-        output += ";";
+        output += ";\n";
 
         return output;
     }

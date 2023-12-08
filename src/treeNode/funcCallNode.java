@@ -64,6 +64,9 @@ public class funcCallNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
+        if (this.id.convertToJava(className).equals("print")) {
+            return "System.out.println(" + this.params.convertToJava(className) + ")";
+        }
         return className + "." + this.id.convertToJava(className) + "(" + this.params.convertToJava(className) + ")";
     }
 

@@ -88,9 +88,13 @@ public class functionDefNode implements JottTree {
         if (this.params == null) {
             params = "";
         } else {
-            params = this.params.convertToJott();
+            params = this.params.convertToJava(className);
         }
-        return "public static " + this.returnNode.convertToJava(className) + this.funcName.convertToJava(className)
+        if (this.funcName.convertToJava(className).equals("main")) {
+            params = "String[] args";
+        }
+        return "public static " + this.returnNode.convertToJava(className) + " " +
+                this.funcName.convertToJava(className)
                 + "(" + params + ") {\n"
                 + this.body.convertToJava(className) + "}";
     }
