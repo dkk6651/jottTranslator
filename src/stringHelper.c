@@ -8,6 +8,10 @@ char* concat(char* s1, char* s2){
     return(newStr);
 }
 
+int length(char* string){
+    return strlen(string);
+}
+
 void printBool(int val){
     printf("%d\n", val);
 }
