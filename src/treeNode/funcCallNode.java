@@ -69,6 +69,24 @@ public class funcCallNode implements JottTree {
 
     @Override
     public String convertToC() {
+        if(this.id.convertToC().equals("print")){
+            try{
+                if(this.params.validateTree() == ReturnType.Integer){
+                    return "printInt(" + this.params.convertToC() +")";
+                }
+                else if(this.params.validateTree() == ReturnType.String){
+                    return "printString(" + this.params.convertToC() + ")";
+                }
+                else if(this.params.validateTree() == ReturnType.Double){
+                    return "printDouble(" + this.params.convertToC() + ")";
+                }
+                else if(this.params.validateTree() == ReturnType.Boolean){
+                    return "printBool(" + this.params.convertToC() + ")";
+                }
+            }
+            catch(Exception ignored){}
+
+        }
         return this.id.convertToC() + "(" + this.params.convertToC() + ")";
     }
 

@@ -111,7 +111,7 @@ public class paramsNode implements JottTree {
             }
             else{
                 SymbolTable.printFlag = false;
-                return null;
+                return expressionNode.validateTree();
             }
         }
 
