@@ -16,11 +16,11 @@ public class numNode extends exprNode {
 
     public numNode(Token token){
         this.token = token;
-        if(isDouble(token.getToken())){
-            this.type = ReturnType.Double;
+        if(isInteger(token.getToken())){
+            this.type = ReturnType.Integer;
         }
         else{
-            this.type = ReturnType.Integer;
+            this.type = ReturnType.Double;
         }
     }
 
