@@ -64,6 +64,7 @@ public class programNode implements JottTree {
         for (JottTree funcDef : functionDefNodes) {
             cOutput.append(funcDef.convertToC());
             cOutput.append("\n");
+            SymbolTable.symTable.exitScope();
         }
         return cOutput.toString();
     }

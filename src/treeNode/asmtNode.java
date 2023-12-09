@@ -102,17 +102,21 @@ public class asmtNode implements JottTree {
     }
 
     @Override
-    public String convertToC() {
+    public String convertToC(){
         String output = "";
 
         if (type != null) {
-            output += type.convertToC();
+            output += type.convertToC() + " ";
+            try{
+                SymbolTable.scope.put(id.convertToC(), type.validateTree());
+            }
+            catch(Exception ignored){}
         }
 
         output += id.convertToC();
         output += " = ";
         output += expr.convertToC();
-        output += ";";
+        output += ";\n";
 
         return output;
     }

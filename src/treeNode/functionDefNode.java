@@ -107,7 +107,8 @@ public class functionDefNode implements JottTree {
         } else {
             params = this.params.convertToC();
         }
-        return this.returnNode.convertToC() + this.funcName.convertToC() + "(" + params + "){\n"
+        SymbolTable.symTable.enterScope(this.funcName.convertToC());
+        return this.returnNode.convertToC() + " " + this.funcName.convertToC() + "(" + params + "){\n"
                 + this.body.convertToC()
                 + "}";
     }
