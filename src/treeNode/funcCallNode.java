@@ -75,16 +75,17 @@ public class funcCallNode implements JottTree {
         if(this.id.convertToC().equals("print")){
             try{
                 SymbolTable.printFlag = true;
-                if(this.params.validateTree() == ReturnType.Integer){
+                ReturnType type = this.params.validateTree();
+                if(type == ReturnType.Integer){
                     return "printInt(" + this.params.convertToC() +")";
                 }
-                else if(this.params.validateTree() == ReturnType.String){
+                else if(type == ReturnType.String){
                     return "printString(" + this.params.convertToC() + ")";
                 }
-                else if(this.params.validateTree() == ReturnType.Double){
+                else if(type == ReturnType.Double){
                     return "printDouble(" + this.params.convertToC() + ")";
                 }
-                else if(this.params.validateTree() == ReturnType.Boolean){
+                else if(type == ReturnType.Boolean){
                     return "printBool(" + this.params.convertToC() + ")";
                 }
             }
