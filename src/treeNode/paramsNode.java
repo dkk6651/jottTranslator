@@ -59,42 +59,42 @@ public class paramsNode implements JottTree {
 
     @Override
     public String convertToJava(String className) {
-        String build = "";
+        StringBuilder build = new StringBuilder();
         if (expressionNode != null) {
-            build += expressionNode.convertToJava(className);
+            build.append(expressionNode.convertToJava(className));
             for (JottTree arg : expressions) {
-                build += ", ";
-                build += arg.convertToJava(className);
+                build.append(", ");
+                build.append(arg.convertToJava(className));
             }
         }
-        return build;
+        return build.toString();
     }
 
     @Override
     public String convertToC() {
-        String build = "";
+        StringBuilder build = new StringBuilder();
         if (expressionNode != null) {
-            build += expressionNode.convertToC();
+            build.append(expressionNode.convertToC());
             for (JottTree arg : expressions) {
-                build += ", ";
-                build += arg.convertToC();
+                build.append(", ");
+                build.append(arg.convertToC());
             }
         }
-        return build;
+        return build.toString();
     }
 
     @Override
     public String convertToPython(int depth) {
-        String build = "";
+        StringBuilder build = new StringBuilder();
         
         if (expressionNode!=null){
-            build += expressionNode.convertToPython(depth);
+            build.append(expressionNode.convertToPython(depth));
             for (JottTree arg : expressions) {
-                build += ", ";
-                build+= arg.convertToPython(depth);
+                build.append(", ");
+                build.append(arg.convertToPython(depth));
             }
         }
-        return build;
+        return build.toString();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class paramsNode implements JottTree {
             }
             else{
                 SymbolTable.printFlag = false;
-                return expressionNode.validateTree();
+                return null;
             }
         }
 
