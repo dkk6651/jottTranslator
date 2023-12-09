@@ -114,7 +114,7 @@ public class JottParserTester {
                 writer.write(jottCode);
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
             ArrayList<Token> newTokens = JottTokenizer.tokenize("parserTestCases/parserTestTemp.jott");
@@ -154,7 +154,7 @@ public class JottParserTester {
         }catch (Exception e){
             System.err.println("\tFailed Test: " + test.testName);
             System.err.println("Unknown Exception occured.");
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
@@ -177,7 +177,7 @@ public class JottParserTester {
             orginalJottCode = new String(
                     Files.readAllBytes(Paths.get("parserTestCases/" + test.fileName)));
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
         return parserTest(test, orginalJottCode);
